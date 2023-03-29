@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { BlobServiceClient } from '@azure/storage-blob';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { InvoiceItem } from 'src/app/models/invoice-item';
 import { environment } from 'src/environment';
 import { InvoiceItemDialogComponent } from '../invoice-item-dialog/invoice-item-dialog.component';
@@ -19,20 +17,20 @@ export class InvoiceComponent {
   fileName: string = '';
   invoiceData: InvoiceItem[] = [
     {
-      title: 'Product 1',
-      manufacturer: 'Manufacturer 1',
+      title: 'Продукт 1',
+      manufacturer: 'Виробник 1',
       quantity: 2,
       price: 10,
     },
     {
-      title: 'Product 2',
-      manufacturer: 'Manufacturer 2',
+      title: 'Продукт 2',
+      manufacturer: 'Виробник 2',
       quantity: 1,
       price: 20,
     },
     {
-      title: 'Product 3',
-      manufacturer: 'Manufacturer 3',
+      title: 'Продукт 3',
+      manufacturer: 'Виробник 3',
       quantity: 3,
       price: 5,
     },
@@ -56,17 +54,17 @@ export class InvoiceComponent {
     },
     {
       columnDef: 'quantity',
-      header: 'Кількість',
+      header: 'Кількість, шт',
       cell: (element: InvoiceItem) => `${element.quantity}`,
     },
     {
       columnDef: 'price',
-      header: 'Ціна',
+      header: 'Ціна, грн',
       cell: (element: InvoiceItem) => `${element.price}`,
     },
     {
       columnDef: 'sum',
-      header: 'Сума',
+      header: 'Сума, грн',
       cell: (element: InvoiceItem) => `${element.price * element.quantity}`,
     },
   ];
@@ -135,15 +133,13 @@ export class InvoiceComponent {
   }
 
   async generateInvoice() {
-    const doc = new jsPDF();
-    let result = this.getDataForPdf();
-    autoTable(doc, {
-      theme: 'plain',
-      head: [[...result[0]]],
-      body: result.slice(1),
-    });
+    const pdfMake = require('pdfmake/build/pdfmake');
+    const pdfFonts = require('pdfmake/build/vfs_fonts');
+    (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
-    doc.save(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
+    pdfMake
+      .createPdf(this.getDocDefinition())
+      .download(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
     const containerClient =
       this.blobServiceClient.getContainerClient('invoicer');
@@ -153,18 +149,30 @@ export class InvoiceComponent {
     await blockBlobClient.upload(content, content.length);
   }
 
-  getDataForPdf(): any {
-    let result = [];
-    result.push(this.columns.map((c) => c.header));
+  getDocDefinition(): any {
+    let result = { content: [] as any[] };
+
+    result.content.push({ table: { body: this.getTableBodyForPdf() } } as any);
+
+    return result;
+  }
+
+  getTableBodyForPdf(): any[][] {
+    let result: any[][] = [];
+
+    let headers = this.columns.map(
+      (c) => ({ text: c.header, style: 'tableHeader' } as any)
+    );
+    result.push(headers);
 
     this.invoiceData.forEach((row, i) =>
       result.push([
-        i + 1,
+        `${i + 1}`,
         row.title,
         row.manufacturer,
-        row.quantity,
-        row.price,
-        row.price * row.quantity,
+        `${row.quantity}`,
+        `${row.price}`,
+        `${row.price * row.quantity}`,
       ])
     );
 
