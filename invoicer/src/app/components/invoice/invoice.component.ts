@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { BlobServiceClient } from '@azure/storage-blob';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { InvoiceItem } from 'src/app/models/invoice-item';
+import { environment } from 'src/environment';
 import { InvoiceItemDialogComponent } from '../invoice-item-dialog/invoice-item-dialog.component';
+import { SavedInvoicesDialogComponent } from '../saved-invoices/saved-invoices.component';
 
 @Component({
   selector: 'app-invoice',
@@ -11,6 +15,8 @@ import { InvoiceItemDialogComponent } from '../invoice-item-dialog/invoice-item-
   styleUrls: ['./invoice.component.css'],
 })
 export class InvoiceComponent {
+  blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
+  fileName: string = '';
   invoiceData: InvoiceItem[] = [
     {
       title: 'Product 1',
@@ -31,85 +37,137 @@ export class InvoiceComponent {
       price: 5,
     },
   ];
-  total = 55;
-  companyName = 'ABC Company';
+
   columns = [
     {
       columnDef: 'number',
-      header: 'No.',
+      header: '№',
       cell: (_: InvoiceItem, i: number) => `${i}`,
     },
     {
       columnDef: 'title',
-      header: 'Title',
+      header: 'Модель',
       cell: (element: InvoiceItem) => `${element.title}`,
     },
     {
       columnDef: 'manufacturer',
-      header: 'Manufacturer',
+      header: 'Виробник',
       cell: (element: InvoiceItem) => `${element.manufacturer}`,
     },
     {
       columnDef: 'quantity',
-      header: 'Quantity',
+      header: 'Кількість',
       cell: (element: InvoiceItem) => `${element.quantity}`,
     },
     {
       columnDef: 'price',
-      header: 'Price',
+      header: 'Ціна',
       cell: (element: InvoiceItem) => `${element.price}`,
     },
     {
       columnDef: 'sum',
-      header: 'Sum',
+      header: 'Сума',
       cell: (element: InvoiceItem) => `${element.price * element.quantity}`,
     },
   ];
   displayedColumns = this.columns.map((c) => c.columnDef).concat('action');
 
+  @ViewChild(MatTable) table!: MatTable<InvoiceItem>;
+
   constructor(public dialog: MatDialog) {}
 
   edit(i: number) {
+    let invoiceItem: InvoiceItem = { ...this.invoiceData[i] };
     const dialogRef = this.dialog.open(InvoiceItemDialogComponent, {
+      width: '75vw',
+      enterAnimationDuration: '25ms',
+      exitAnimationDuration: '25ms',
+      data: invoiceItem,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.invoiceData[i] = result;
+        this.table.renderRows();
+      }
+    });
+  }
+
+  add() {
+    const dialogRef = this.dialog.open(InvoiceItemDialogComponent, {
+      width: '75vw',
+      enterAnimationDuration: '25ms',
+      exitAnimationDuration: '25ms',
+      data: {
+        title: '',
+        manufacturer: '',
+        price: 1,
+        quantity: 1,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.invoiceData.push(result);
+        this.table.renderRows();
+      }
+    });
+  }
+
+  delete(i: number) {
+    this.invoiceData.splice(i, 1);
+    this.table.renderRows();
+  }
+
+  open() {
+    const dialogRef = this.dialog.open(SavedInvoicesDialogComponent, {
       width: '75vw',
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.invoiceData[i] = result;
+      if (result) {
+        this.invoiceData = JSON.parse(result.invoice) as InvoiceItem[];
+        this.fileName = result.fileName;
+      }
     });
   }
 
-  generateInvoice() {
+  async generateInvoice() {
     const doc = new jsPDF();
+    let result = this.getDataForPdf();
+    autoTable(doc, {
+      theme: 'plain',
+      head: [[...result[0]]],
+      body: result.slice(1),
+    });
 
-    autoTable(doc, { html: '#invoice-table' });
+    doc.save(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
-    doc.save('table.pdf');
+    const containerClient =
+      this.blobServiceClient.getContainerClient('invoicer');
+    const content = JSON.stringify(this.invoiceData);
+    const blobName = `${this.fileName ? this.fileName : 'Receipt'}.pdf`;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    await blockBlobClient.upload(content, content.length);
+  }
 
-    /* let component = this;
-        const doc = new jsPDF();
-        const tableHeaders = ['Number', 'Title', 'Manufacturer', 'Quantity', 'Price', 'Sum'];
-        const tableData = this.invoiceData.map(row => [row.number, row.title, row.manufacturer, row.quantity, row.price, row.sum]);
-        const tableOptions = {
-          columnStyles: {0: {cellWidth: 15}, 1: {cellWidth: 60}, 2: {cellWidth: 45}, 3: {cellWidth: 15}, 4: {cellWidth: 20}, 5: {cellWidth: 20}},
-          margin: {top: 60},
-          styles: {fontSize: 10},
-          addPageContent: function(data: any) {
-            doc.text(component.companyName, 14, 22);
-            doc.text('Invoice', 168, 22);
-            doc.line(14, 25, 196, 25);
-            doc.text('Contact information:', 14, 35);
-            doc.text('Additional description:', 14, 45);
-            autoTable(doc, {
-              startY: 50,
-              head: [tableHeaders],
-              body: data,
-              foot: [[{content: 'Total', colSpan: 4, styles: {halign: 'right'}}, {}, {}, {}, component.total]],
-              showFoot: 'lastPage'});
-              doc.save('invoice.pdf');
-            }
-        } */
+  getDataForPdf(): any {
+    let result = [];
+    result.push(this.columns.map((c) => c.header));
+
+    this.invoiceData.forEach((row, i) =>
+      result.push([
+        i + 1,
+        row.title,
+        row.manufacturer,
+        row.quantity,
+        row.price,
+        row.price * row.quantity,
+      ])
+    );
+
+    return result;
   }
 }

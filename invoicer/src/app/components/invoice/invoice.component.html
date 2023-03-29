@@ -1,6 +1,19 @@
 <div class="tools">
-  <button mat-raised-button (click)="generateInvoice()">Add item</button>
-  <button mat-raised-button (click)="generateInvoice()">Download</button>
+  <button mat-raised-button (click)="open()">Відкрити збережений</button>
+  <button mat-raised-button (click)="add()">Додати елемент</button>
+  <div class="save">
+    <mat-form-field class="file-name">
+      <mat-label>Назва файлу</mat-label>
+      <input matInput [(ngModel)]="fileName" name="title" />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      (click)="generateInvoice()"
+      [disabled]="fileName === '' ? true : false"
+    >
+      <mat-icon>save</mat-icon> Зберегти
+    </button>
+  </div>
 </div>
 
 <mat-divider></mat-divider>
@@ -25,9 +38,16 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let row; let i = index">
-        <button mat-raised-button (click)="edit(i)">Edit</button>
+      <th mat-header-cell *matHeaderCellDef class="right-align">
+        <div class="mr">Дії</div>
+      </th>
+      <td mat-cell *matCellDef="let row; let i = index" class="right-align">
+        <button mat-flat-button (click)="edit(i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-flat-button (click)="delete(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </ng-container>
 

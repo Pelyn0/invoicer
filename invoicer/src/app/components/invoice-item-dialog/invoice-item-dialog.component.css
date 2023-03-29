@@ -1,0 +1,12 @@
+.invoice-item-form {
+  width: 100%;
+}
+
+.flex-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice-item-full-width {
+  width: 100%;
+}

@@ -8,7 +8,11 @@ import { InvoiceItem } from 'src/app/models/invoice-item';
   styleUrls: ['./invoice-item-dialog.component.css'],
 })
 export class InvoiceItemDialogComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<InvoiceItemDialogComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<InvoiceItemDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: InvoiceItem
+  ) {}
   ngOnInit(): void {}
   onNoClick(): void {
     this.dialogRef.close();

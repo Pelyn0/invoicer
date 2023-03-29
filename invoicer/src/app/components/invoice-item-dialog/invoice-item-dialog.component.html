@@ -1,6 +1,40 @@
-<h1 mat-dialog-title>Delete file</h1>
-<div mat-dialog-content>Would you like to delete cat.jpeg?</div>
+<h1 mat-dialog-title>Додати/Редагувати елемент</h1>
+<div mat-dialog-content>
+  <form class="invoice-item-form">
+    <div class="flex-inputs">
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Модель</mat-label>
+        <input matInput [(ngModel)]="data.title" name="title" />
+      </mat-form-field>
+
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Виробник</mat-label>
+        <input matInput [(ngModel)]="data.manufacturer" name="manufacturer" />
+      </mat-form-field>
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Кількість</mat-label>
+        <input
+          matInput
+          type="number"
+          min="1"
+          [(ngModel)]="data.quantity"
+          name="quantity"
+        />
+      </mat-form-field>
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Ціна</mat-label>
+        <input
+          matInput
+          type="number"
+          min="1"
+          [(ngModel)]="data.price"
+          name="price"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Відмінити</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Зберегти</button>
 </div>

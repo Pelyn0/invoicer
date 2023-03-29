@@ -8,3 +8,25 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.file-name {
+  margin: 0 3%;
+}
+
+.save {
+  display: flex;
+}
+
+.save button {
+  display: flex;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.right-align {
+  text-align: end;
+}
+
+.mr {
+  margin-right: 10%;
+}

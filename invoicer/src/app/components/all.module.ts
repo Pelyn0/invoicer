@@ -7,13 +7,22 @@ import { MatDividerModule } from '@angular/material/divider';
 import { InvoiceItemDialogComponent } from './invoice-item-dialog/invoice-item-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { SavedInvoicesDialogComponent } from './saved-invoices/saved-invoices.component';
 
 @NgModule({
-  exports: [InvoiceComponent, InvoiceItemDialogComponent],
-  declarations: [InvoiceComponent, InvoiceItemDialogComponent],
+  exports: [
+    InvoiceComponent,
+    InvoiceItemDialogComponent,
+    SavedInvoicesDialogComponent,
+  ],
+  declarations: [
+    InvoiceComponent,
+    InvoiceItemDialogComponent,
+    SavedInvoicesDialogComponent,
+  ],
   imports: [
     BrowserModule,
     MatTableModule,
