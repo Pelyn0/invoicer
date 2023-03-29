@@ -1,0 +1,10 @@
+.body {
+  margin: auto 5% auto 5%;
+  align-items: center;
+}
+
+.tools {
+  margin: 1% 5% 1% 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
