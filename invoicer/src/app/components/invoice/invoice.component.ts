@@ -150,9 +150,36 @@ export class InvoiceComponent {
   }
 
   getDocDefinition(): any {
-    let result = { content: [] as any[] };
+    let result = { content: [] as any[], styles: {} };
 
-    result.content.push({ table: { body: this.getTableBodyForPdf() } } as any);
+    result.content.push({
+      stack: [
+        'Event – Агенція «ВОлЮр»',
+        'Звукове, світлове та сценічне обладння',
+        'Мультимедіа та спецефекти',
+        'м. Яворів, вул. Маковея, 62',
+        'Масюк Олег Володимирович',
+        'тел. 097 176 35 75',
+      ],
+      style: 'header',
+      margin: [0, 0, 0, 25],
+    });
+
+    result.content.push({
+      table: {
+        widths: ['*', '*', '*', '*', '*', '*'],
+        body: this.getTableBodyForPdf(),
+      },
+    } as any);
+
+    result.styles = {
+      header: {
+        alignment: 'right',
+      },
+      tableHeader: {
+        bold: true,
+      },
+    };
 
     return result;
   }
@@ -175,6 +202,21 @@ export class InvoiceComponent {
         `${row.price * row.quantity}`,
       ])
     );
+
+    result.push([
+      { colSpan: 5, text: 'Загалом:', style: 'tableHeader' },
+      '',
+      '',
+      '',
+      '',
+      {
+        text: `${this.invoiceData.reduce(
+          (accumulator, row) => accumulator + row.price * row.quantity,
+          0
+        )}`,
+        style: 'tableHeader',
+      },
+    ]);
 
     return result;
   }
