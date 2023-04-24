@@ -11,17 +11,20 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SavedInvoicesDialogComponent } from './saved-invoices/saved-invoices.component';
+import { InvoiceActionDialogComponent } from './invoice-action-dialog/invoice-action-dialog.component';
 
 @NgModule({
   exports: [
     InvoiceComponent,
     InvoiceItemDialogComponent,
     SavedInvoicesDialogComponent,
+    InvoiceActionDialogComponent,
   ],
   declarations: [
     InvoiceComponent,
     InvoiceItemDialogComponent,
     SavedInvoicesDialogComponent,
+    InvoiceActionDialogComponent,
   ],
   imports: [
     BrowserModule,

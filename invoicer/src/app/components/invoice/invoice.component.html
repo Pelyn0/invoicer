@@ -1,6 +1,7 @@
 <div class="tools">
   <button mat-raised-button (click)="open()">Відкрити збережений</button>
   <button mat-raised-button (click)="add()">Додати елемент</button>
+  <button mat-raised-button (click)="addAction()">Додати дію</button>
   <div class="save">
     <mat-form-field class="file-name">
       <mat-label>Назва файлу</mat-label>
@@ -19,6 +20,18 @@
 <mat-divider></mat-divider>
 
 <div class="body">
+  <div class="actions">
+    <p *ngFor="let action of actions; let i = index">
+      —&nbsp; {{ action.toString() }}
+      <button mat-flat-button (click)="editAction(i)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-flat-button (click)="deleteAction(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </p>
+  </div>
+
   <table
     mat-table
     [dataSource]="invoiceData"

@@ -6,6 +6,8 @@ import { InvoiceItem } from 'src/app/models/invoice-item';
 import { environment } from 'src/environment';
 import { InvoiceItemDialogComponent } from '../invoice-item-dialog/invoice-item-dialog.component';
 import { SavedInvoicesDialogComponent } from '../saved-invoices/saved-invoices.component';
+import { InvoiceActionDialogComponent } from '../invoice-action-dialog/invoice-action-dialog.component';
+import { Invoice } from 'src/app/models/invoice';
 
 @Component({
   selector: 'app-invoice',
@@ -15,6 +17,8 @@ import { SavedInvoicesDialogComponent } from '../saved-invoices/saved-invoices.c
 export class InvoiceComponent {
   blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
   fileName: string = '';
+  actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
+
   invoiceData: InvoiceItem[] = [
     {
       title: 'Продукт 1',
@@ -91,6 +95,22 @@ export class InvoiceComponent {
     });
   }
 
+  editAction(i: number) {
+    let action: any = { action: this.actions[i] };
+    const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
+      width: '75vw',
+      enterAnimationDuration: '25ms',
+      exitAnimationDuration: '25ms',
+      data: action,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.actions[i] = result.action;
+      }
+    });
+  }
+
   add() {
     const dialogRef = this.dialog.open(InvoiceItemDialogComponent, {
       width: '75vw',
@@ -112,11 +132,30 @@ export class InvoiceComponent {
     });
   }
 
+  addAction() {
+    const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
+      width: '75vw',
+      enterAnimationDuration: '25ms',
+      exitAnimationDuration: '25ms',
+      data: {
+        action: '',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.actions.push(result.action);
+      }
+    });
+  }
+
   delete(i: number) {
     this.invoiceData.splice(i, 1);
     this.table.renderRows();
   }
-
+  deleteAction(i: number) {
+    this.actions.splice(i, 1);
+  }
   open() {
     const dialogRef = this.dialog.open(SavedInvoicesDialogComponent, {
       width: '75vw',
@@ -126,7 +165,10 @@ export class InvoiceComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.invoiceData = JSON.parse(result.invoice) as InvoiceItem[];
+        let invoice = JSON.parse(result.invoice) as Invoice;
+
+        this.invoiceData = invoice.invoiceData as InvoiceItem[];
+        this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
       }
     });
@@ -143,7 +185,8 @@ export class InvoiceComponent {
 
     const containerClient =
       this.blobServiceClient.getContainerClient('invoicer');
-    const content = JSON.stringify(this.invoiceData);
+    const content = JSON.stringify(this.getInvoice());
+    debugger;
     const blobName = `${this.fileName ? this.fileName : 'Receipt'}.pdf`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     await blockBlobClient.upload(content, content.length);
@@ -159,6 +202,7 @@ export class InvoiceComponent {
         'Мультимедіа та спецефекти',
         'м. Яворів, вул. Маковея, 62',
         'Масюк Олег Володимирович',
+        'DJMergal@gmail.com',
         'тел. 097 176 35 75',
       ],
       style: 'header',
@@ -166,8 +210,13 @@ export class InvoiceComponent {
     });
 
     result.content.push({
+      ul: this.actions,
+      margin: [0, 0, 0, 25],
+    });
+
+    result.content.push({
       table: {
-        widths: ['*', '*', '*', '*', '*', '*'],
+        widths: ['auto', '*', '*', 'auto', 'auto', 'auto'],
         body: this.getTableBodyForPdf(),
       },
     } as any);
@@ -219,5 +268,12 @@ export class InvoiceComponent {
     ]);
 
     return result;
+  }
+
+  private getInvoice() {
+    return {
+      actions: this.actions,
+      invoiceData: this.invoiceData,
+    };
   }
 }

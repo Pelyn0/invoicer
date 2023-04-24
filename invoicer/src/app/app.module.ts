@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AllModule } from './components/all.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InvoiceItemDialogComponent } from './components/invoice-item-dialog/invoice-item-dialog.component';
 
 @NgModule({
   declarations: [AppComponent],
