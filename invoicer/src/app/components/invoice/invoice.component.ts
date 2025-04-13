@@ -18,6 +18,7 @@ export class InvoiceComponent {
   //blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
   fileName: string = '';
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
+  discount: number = 0;
 
   invoiceData: InvoiceItem[] = [
     {
@@ -101,7 +102,10 @@ export class InvoiceComponent {
       width: '75vw',
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
-      data: action,
+      data: {
+        discount: this.discount,
+        ...action,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -139,6 +143,7 @@ export class InvoiceComponent {
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
+        discount: this.discount,
         action: '',
       },
     });
@@ -253,6 +258,11 @@ export class InvoiceComponent {
       ])
     );
 
+    let sum = this.invoiceData.reduce(
+      (accumulator, row) => accumulator + row.price * row.quantity,
+      0
+    );
+
     result.push([
       { colSpan: 5, text: 'Загалом:', style: 'tableHeader' },
       '',
@@ -260,10 +270,33 @@ export class InvoiceComponent {
       '',
       '',
       {
-        text: `${this.invoiceData.reduce(
-          (accumulator, row) => accumulator + row.price * row.quantity,
-          0
-        )}`,
+        text: `${sum}`,
+        style: 'tableHeader',
+      },
+    ]);
+
+    if(this.discount > 0){
+      result.push([
+        { colSpan: 5, text: 'Знижка:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${this.discount}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
+      
+    result.push([
+      { colSpan: 5, text: 'До сплати:', style: 'tableHeader' },
+      '',
+      '',
+      '',
+      '',
+      {
+        text: `${sum - this.discount}`,
         style: 'tableHeader',
       },
     ]);
