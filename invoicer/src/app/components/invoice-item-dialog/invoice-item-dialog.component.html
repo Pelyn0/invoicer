@@ -4,16 +4,6 @@
     <div class="flex-inputs">
       
       <mat-form-field class="invoice-item-full-width">
-        <mat-label>Вибрати</mat-label>
-        <select matNativeControl [(ngModel)]="selectedCar" name="car">
-          <option value="" selected></option>
-          @for (car of cars; track car) {
-            <option [value]="car.value">{{car.viewValue}}</option>
-          }
-        </select>
-      </mat-form-field>
-      
-      <mat-form-field class="invoice-item-full-width">
         <mat-label>Модель</mat-label>
         <input matInput [(ngModel)]="data.title" name="title" />
       </mat-form-field>
