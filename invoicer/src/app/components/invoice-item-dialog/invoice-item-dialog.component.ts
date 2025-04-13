@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { InvoiceItem } from 'src/app/models/invoice-item';
 
 @Component({
@@ -17,6 +18,11 @@ export class InvoiceItemDialogComponent implements OnInit {
   ngOnInit(): void {}
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  
+  onSelectedCarChanged(newValue: string) {
+    console.log('Model changed to:', newValue);
+    // react to change here
   }
 
   cars: InvoiceItem[] = [
