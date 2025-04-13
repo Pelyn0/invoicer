@@ -121,6 +121,7 @@ export class InvoiceComponent {
         manufacturer: '',
         price: 1,
         quantity: 1,
+        selectedCar: 'volvo',
       },
     });
 

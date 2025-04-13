@@ -4,6 +4,11 @@
     <div class="flex-inputs">
       
       <mat-form-field class="invoice-item-full-width">
+        <mat-label>Вибрати</mat-label>
+        <input matInput [(ngModel)]="data.selectedCar" name="Choose" />
+      </mat-form-field>
+
+      <mat-form-field class="invoice-item-full-width">
         <mat-label>Модель</mat-label>
         <input matInput [(ngModel)]="data.title" name="title" />
       </mat-form-field>

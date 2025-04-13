@@ -3,4 +3,5 @@ export interface InvoiceItem {
   manufacturer: string;
   quantity: number;
   price: number;
+  selectedCar: string,
 }
