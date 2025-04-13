@@ -21,9 +21,11 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
+        working-directory: ./invoicer
         run: npm install
 
       - name: Prepare and deploy
+        working-directory: ./invoicer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run ng -- deploy --base-href=/invoicer/ --name="Pelyn0" --email="tarasfall@gmail.com"
