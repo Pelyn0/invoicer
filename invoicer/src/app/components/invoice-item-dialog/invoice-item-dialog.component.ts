@@ -2,11 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InvoiceItem } from 'src/app/models/invoice-item';
 
-cars: Car[] = [
-    {value: 'volvo', viewValue: 'Volvo'},
-    {value: 'saab', viewValue: 'Saab'},
-    {value: 'mercedes', viewValue: 'Mercedes'},
-  ];
+interface Car {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-invoice-item-dialog',
@@ -14,7 +13,6 @@ cars: Car[] = [
   styleUrls: ['./invoice-item-dialog.component.css'],
 })
 export class InvoiceItemDialogComponent implements OnInit {
-  selectedCar: string;
   cars: Car[] = [
     {value: 'volvo', viewValue: 'Volvo'},
     {value: 'saab', viewValue: 'Saab'},
@@ -23,7 +21,8 @@ export class InvoiceItemDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<InvoiceItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: InvoiceItem
+    public data: InvoiceItem,
+    public selectedCar: string
   ) {}
   ngOnInit(): void {}
   onNoClick(): void {
