@@ -9,7 +9,7 @@ import { environment } from 'src/environment';
   styleUrls: ['./saved-invoices.component.css'],
 })
 export class SavedInvoicesDialogComponent implements OnInit {
-  blobServiceClient = new BlobServiceClient(environment.blobSasUrl);
+  //blobServiceClient = new BlobServiceClient(environment.blobSasUrl);
   files: string[] = [];
 
   constructor(public dialogRef: MatDialogRef<SavedInvoicesDialogComponent>) {}
@@ -20,30 +20,30 @@ export class SavedInvoicesDialogComponent implements OnInit {
 
   async getList() {
     this.files = [];
-    const containerClient =
-      this.blobServiceClient.getContainerClient('invoicer');
-    let blobs = containerClient.listBlobsFlat();
+    //const containerClient =
+    //  this.blobServiceClient.getContainerClient('invoicer');
+    //let blobs = containerClient.listBlobsFlat();
 
-    for await (const blob of blobs) {
-      this.files.push(blob.name);
-    }
+    //for await (const blob of blobs) {
+    //  this.files.push(blob.name);
+    //}
   }
 
   async onSelect(name: string) {
-    const containerClient =
-      this.blobServiceClient.getContainerClient('invoicer');
+    //const containerClient =
+    //  this.blobServiceClient.getContainerClient('invoicer');
 
-    const blobClient = containerClient.getBlobClient(name);
-    const downloadBlockBlobResponse = await blobClient.download();
-    if (downloadBlockBlobResponse.blobBody) {
-      let content = await (await downloadBlockBlobResponse.blobBody).text();
-      this.dialogRef.close({
-        fileName: this.getFileName(name).slice(0, -4),
-        invoice: content,
-      });
-    } else {
-      this.dialogRef.close();
-    }
+    //const blobClient = containerClient.getBlobClient(name);
+    //const downloadBlockBlobResponse = await blobClient.download();
+    //if (downloadBlockBlobResponse.blobBody) {
+    //  let content = await (await downloadBlockBlobResponse.blobBody).text();
+    //  this.dialogRef.close({
+    //    fileName: this.getFileName(name).slice(0, -4),
+    //    invoice: content,
+    //  });
+    //} else {
+    //  this.dialogRef.close();
+    //}
   }
 
   getFileName(name: string) {

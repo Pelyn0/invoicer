@@ -15,7 +15,7 @@ import { Invoice } from 'src/app/models/invoice';
   styleUrls: ['./invoice.component.css'],
 })
 export class InvoiceComponent {
-  blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
+  //blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
   fileName: string = '';
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
 
@@ -184,13 +184,13 @@ export class InvoiceComponent {
       .createPdf(this.getDocDefinition())
       .download(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
-    const containerClient =
-      this.blobServiceClient.getContainerClient('invoicer');
+    //const containerClient =
+    //  this.blobServiceClient.getContainerClient('invoicer');
     const content = JSON.stringify(this.getInvoice());
     debugger;
     const blobName = `${this.fileName ? this.fileName : 'Receipt'}.pdf`;
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    await blockBlobClient.upload(content, content.length);
+    //const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    //await blockBlobClient.upload(content, content.length);
   }
 
   getDocDefinition(): any {
