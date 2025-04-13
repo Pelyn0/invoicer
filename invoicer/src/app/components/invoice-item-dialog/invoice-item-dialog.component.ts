@@ -2,11 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InvoiceItem } from 'src/app/models/invoice-item';
 
-interface Car {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-invoice-item-dialog',
   templateUrl: './invoice-item-dialog.component.html',
@@ -27,8 +22,8 @@ export class InvoiceItemDialogComponent implements OnInit {
   cars: InvoiceItem[] = [
     {
       value: 1,
-      title: 'Рухома голова 3 в 1 PowerLight HotBeam BS 360',
-      manufacturer: '',
+      title: 'Рухома голова 3 в 1',
+      manufacturer: 'PowerLight HotBeam BS 360',
       quantity: 12,
       price: 1600
     },

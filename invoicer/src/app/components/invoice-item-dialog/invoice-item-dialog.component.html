@@ -13,7 +13,7 @@
 
       <mat-form-field class="invoice-item-full-width">
         <mat-label>Модель</mat-label>
-        <input matInput [(ngModel)]="data.title" name="title" />
+        <input matInput [(ngModel)]="data.title" name="title" [value]="cars.find(c=>c.value==selectedCar)?.title" />
       </mat-form-field>
 
       <mat-form-field class="invoice-item-full-width">
