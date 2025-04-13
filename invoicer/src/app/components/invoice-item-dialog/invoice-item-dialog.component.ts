@@ -16,8 +16,11 @@ export class InvoiceItemDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<InvoiceItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: InvoiceItem
-  ) {}
+    public data: InvoiceItem,
+    public selectedCar: string
+  ) {
+    this.selectedCar = 'volvo';
+  }
   ngOnInit(): void {}
   onNoClick(): void {
     this.dialogRef.close();
