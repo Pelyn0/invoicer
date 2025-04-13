@@ -21,8 +21,14 @@ export class InvoiceItemDialogComponent implements OnInit {
   }
   
   onSelectedCarChanged(newValue: string) {
-    console.log('Model changed to:', newValue);
-    // react to change here
+    let selected = this.cars.find(c=>c.selectedCar==newValue);
+    
+    if(selected){
+      this.data.title = selected?.title;
+      this.data.price = selected?.price;
+      this.data.manufacturer = selected?.manufacturer;
+      this.data.quantity = selected?.quantity;
+    }
   }
 
   cars: InvoiceItem[] = [
