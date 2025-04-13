@@ -4,5 +4,5 @@ export interface InvoiceItem {
   quantity: number;
   price: number;
   selectedCar?: string,
-  value?: number,
+  value?: string,
 }
