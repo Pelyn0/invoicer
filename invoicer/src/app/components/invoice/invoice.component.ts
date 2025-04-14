@@ -111,6 +111,7 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions[i] = result.action;
+        this.discount = result.discount;
       }
     });
   }
@@ -131,6 +132,7 @@ export class InvoiceComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+
         this.invoiceData.push(result);
         this.table.renderRows();
       }
@@ -151,6 +153,7 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions.push(result.action);
+        this.discount = result.discount;
       }
     });
   }
@@ -264,7 +267,7 @@ export class InvoiceComponent {
     );
 
     result.push([
-      { colSpan: 5, text: 'Загалом:', style: 'tableHeader' },
+      { colSpan: 5, text: 'Сума:', style: 'tableHeader' },
       '',
       '',
       '',
@@ -287,19 +290,19 @@ export class InvoiceComponent {
           style: 'tableHeader',
         },
       ]);
-    }
       
-    result.push([
-      { colSpan: 5, text: 'До сплати:', style: 'tableHeader' },
-      '',
-      '',
-      '',
-      '',
-      {
-        text: `${sum - this.discount}`,
-        style: 'tableHeader',
-      },
-    ]);
+      result.push([
+        { colSpan: 5, text: 'Сума зі знижкою:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${sum - this.discount}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
 
     return result;
   }
