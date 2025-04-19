@@ -1,0 +1,12 @@
+.invoice-contacts-form {
+  width: 100%;
+}
+
+.flex-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice-contacts-full-width {
+  width: 100%;
+}

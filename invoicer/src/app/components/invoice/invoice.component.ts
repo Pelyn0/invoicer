@@ -5,6 +5,7 @@ import { BlobServiceClient } from '@azure/storage-blob';
 import { InvoiceItem } from 'src/app/models/invoice-item';
 import { environment } from 'src/environment';
 import { InvoiceItemDialogComponent } from '../invoice-item-dialog/invoice-item-dialog.component';
+import { InvoiceContactsDialogComponent } from '../invoice-contacts-dialog/invoice-contacts-dialog.component';
 import { SavedInvoicesDialogComponent } from '../saved-invoices/saved-invoices.component';
 import { InvoiceActionDialogComponent } from '../invoice-action-dialog/invoice-action-dialog.component';
 import { Invoice } from 'src/app/models/invoice';
@@ -19,6 +20,15 @@ export class InvoiceComponent {
   fileName: string = '';
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
   discount: number = 0;
+  contacts: string[] = [
+    'Event – Агенція «ВОлЮр»',
+    'Звукове, світлове та сценічне обладння',
+    'Мультимедіа та спецефекти',
+    'м. Яворів, вул. Маковея, 62',
+    'Масюк Олег Володимирович',
+    'DJMergal@gmail.com',
+    'тел. 097 176 35 75',
+  ];
 
   invoiceData: InvoiceItem[] = [
     {
@@ -94,6 +104,24 @@ export class InvoiceComponent {
   @ViewChild(MatTable) table!: MatTable<InvoiceItem>;
 
   constructor(public dialog: MatDialog) {}
+
+  changeContacts(){
+    let contacts: string[] = this.contacts ;
+    const dialogRef = this.dialog.open(InvoiceContactsDialogComponent, {
+      width: '75vw',
+      enterAnimationDuration: '25ms',
+      exitAnimationDuration: '25ms',
+      data: {
+        "contactsStr": this.contacts.join('\n'),
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.contacts = result.contactsStr.split('\n');
+      }
+    });
+  }
 
   edit(i: number) {
     let invoiceItem: InvoiceItem = { ...this.invoiceData[i] };
@@ -224,15 +252,7 @@ export class InvoiceComponent {
     let result = { content: [] as any[], styles: {} };
 
     result.content.push({
-      stack: [
-        'Event – Агенція «ВОлЮр»',
-        'Звукове, світлове та сценічне обладння',
-        'Мультимедіа та спецефекти',
-        'м. Яворів, вул. Маковея, 62',
-        'Масюк Олег Володимирович',
-        'DJMergal@gmail.com',
-        'тел. 097 176 35 75',
-      ],
+      stack: this.contacts,
       style: 'header',
       margin: [0, 0, 0, 25],
     });

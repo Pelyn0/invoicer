@@ -23,9 +23,6 @@ export class InvoiceItemDialogComponent implements OnInit {
   onSelectedCarChanged(newValue: string) {
     let selected = this.cars.find(c=>c.value==newValue);
 
-    console.log(newValue);
-    console.log(selected);
-
     if(selected){
       this.data.title = selected?.title;
       this.data.price = selected?.price;

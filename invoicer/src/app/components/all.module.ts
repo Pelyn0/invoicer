@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { InvoiceItemDialogComponent } from './invoice-item-dialog/invoice-item-dialog.component';
+import { InvoiceContactsDialogComponent } from './invoice-contacts-dialog/invoice-contacts-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -17,12 +18,14 @@ import { InvoiceActionDialogComponent } from './invoice-action-dialog/invoice-ac
   exports: [
     InvoiceComponent,
     InvoiceItemDialogComponent,
+    InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
     InvoiceActionDialogComponent,
   ],
   declarations: [
     InvoiceComponent,
     InvoiceItemDialogComponent,
+    InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
     InvoiceActionDialogComponent,
   ],

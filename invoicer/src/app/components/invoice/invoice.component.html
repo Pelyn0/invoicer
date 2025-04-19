@@ -1,5 +1,6 @@
 <div class="tools">
   <button mat-raised-button (click)="open()">Відкрити збережений</button>
+  <button mat-raised-button (click)="changeContacts()">Змінити контакти</button>
   <button mat-raised-button (click)="add()">Додати елемент</button>
   <button mat-raised-button (click)="addAction()">Додати дію</button>
   <div class="save">
@@ -20,6 +21,12 @@
 <mat-divider></mat-divider>
 
 <div class="body">
+  <div>
+    <p *ngFor="let contact of contacts; let i = index">
+      {{ contact.toString() }}
+    </p>
+  </div>
+
   <div class="actions">
     <p *ngFor="let action of actions; let i = index">
       —&nbsp; {{ action.toString() }}
