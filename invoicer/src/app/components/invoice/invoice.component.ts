@@ -60,6 +60,12 @@ export class InvoiceComponent {
     (accumulator, row) => accumulator + (row.discount ?? 0),
     0
   );
+  sum: number = this.invoiceData.reduce(
+    (accumulator, row) => accumulator + (row.price*row.quantity),
+    0
+  );
+  topay: number = this.sum - this.discount;
+
   columns = [
     {
       columnDef: 'number',
@@ -141,6 +147,19 @@ export class InvoiceComponent {
       if (result) {
         this.invoiceData[i] = result;
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
+        
+        this.discount = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.discount ?? 0),
+          0
+        );
+        
+        this.sum = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.price*row.quantity),
+          0
+        );
+
+        this.topay = this.sum - this.discount;
+
         this.table.renderRows();
       }
     });
@@ -184,6 +203,19 @@ export class InvoiceComponent {
 
         this.invoiceData.push(result);
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
+        
+        this.discount = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.discount ?? 0),
+          0
+        );
+
+        this.sum = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.price*row.quantity),
+          0
+        );
+
+        this.topay = this.sum - this.discount;
+
         this.table.renderRows();
       }
     });
