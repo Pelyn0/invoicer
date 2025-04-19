@@ -83,7 +83,7 @@ export class InvoiceComponent {
     {
       columnDef: 'topay',
       header: 'До оплати, грн',
-      cell: (element: InvoiceItem) => `${(element.price * element.quantity) - element.discount}`,
+      cell: (element: InvoiceItem) => `${(element.price * element.quantity) - (element.discount ?? 0)}`,
     },
   ];
   displayedColumns = this.columns.map((c) => c.columnDef).concat('category').concat('action');
@@ -272,7 +272,7 @@ export class InvoiceComponent {
         `${row.price}`,
         `${row.price * row.quantity}`,
         `${row.discount}`,
-        `${(row.price * row.quantity) - row.discount}`,
+        `${(row.price * row.quantity) - (row.discount ?? 0)}`,
       ])
     );
 
