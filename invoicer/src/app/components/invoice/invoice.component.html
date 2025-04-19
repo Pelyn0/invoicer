@@ -21,10 +21,15 @@
 <mat-divider></mat-divider>
 
 <div class="body">
-  <div style="text-align: right;">
-    <p *ngFor="let contact of contacts; let i = index">
-      {{ contact.toString() }}
-    </p>
+  <div>
+    <div>
+      <img [src]="contactImage">
+    </div>
+    <div style="text-align: right;">
+      <p *ngFor="let contact of contacts; let i = index">
+        {{ contact.toString() }}
+      </p>
+    </div>
   </div>
 
   <div class="actions">
