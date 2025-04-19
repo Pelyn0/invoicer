@@ -72,8 +72,18 @@ export class InvoiceComponent {
       header: 'Сума, грн',
       cell: (element: InvoiceItem) => `${element.price * element.quantity}`,
     },
+    {
+      columnDef: 'discount',
+      header: 'Знижка, грн',
+      cell: (element: InvoiceItem) => `${element.discount}`,
+    },
+    {
+      columnDef: 'topay',
+      header: 'До оплати, грн',
+      cell: (element: InvoiceItem) => `${(element.price * element.quantity) - element.discount}`,
+    },
   ];
-  displayedColumns = this.columns.map((c) => c.columnDef).concat('action');
+  displayedColumns = this.columns.map((c) => c.columnDef).concat('category').concat('action');
 
   @ViewChild(MatTable) table!: MatTable<InvoiceItem>;
 
@@ -194,9 +204,9 @@ export class InvoiceComponent {
 
     //const containerClient =
     //  this.blobServiceClient.getContainerClient('invoicer');
-    const content = JSON.stringify(this.getInvoice());
-    debugger;
-    const blobName = `${this.fileName ? this.fileName : 'Receipt'}.pdf`;
+    //const content = JSON.stringify(this.getInvoice());
+    //debugger;
+    //const blobName = `${this.fileName ? this.fileName : 'Receipt'}.pdf`;
     //const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     //await blockBlobClient.upload(content, content.length);
   }
@@ -258,6 +268,8 @@ export class InvoiceComponent {
         `${row.quantity}`,
         `${row.price}`,
         `${row.price * row.quantity}`,
+        `${row.discount}`,
+        `${(row.price * row.quantity) - row.discount}`,
       ])
     );
 
