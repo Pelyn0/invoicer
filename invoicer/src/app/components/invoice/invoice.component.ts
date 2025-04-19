@@ -258,9 +258,6 @@ export class InvoiceComponent {
           [
             {
               stack: [
-                { text: 'Самовивіз Масюк О', bold: true, fontSize: 14 },
-                { text: '23 лютого 2024', bold: true, fontSize: 14 },
-                { text: 'Марсове поле', bold: true, fontSize: 14 }
               ],
               alignment: 'left',
               margin: [0, 0, 0, 0]
@@ -271,7 +268,7 @@ export class InvoiceComponent {
                   width: '*',
                   stack: this.contacts,
                   style: 'header',
-                  alignment: 'right'
+                  alignment: 'left'
                 },
                 {
                   width: 'auto',
