@@ -56,6 +56,7 @@ export class SavedInvoicesDialogComponent implements OnInit {
           invoice: reader.result,
         });
       };
+      reader.readAsDataURL(file);
     }
   }
 
