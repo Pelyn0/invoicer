@@ -31,6 +31,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       this.data.price = selected?.price;
       this.data.manufacturer = selected?.manufacturer;
       this.data.quantity = selected?.quantity;
+      this.data.category = selected?.category;
     }
   }
 
