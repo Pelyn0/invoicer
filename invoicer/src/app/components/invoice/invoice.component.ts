@@ -267,7 +267,7 @@ export class InvoiceComponent {
     result.push(headers);
 
     let groupedData = this.invoiceData.reduce((acc, item) => {
-      let existingCategory = acc.find(group => group.category === item.category);
+      let existingCategory = acc.find(group => group.category == item.category);
       if (existingCategory) {
         existingCategory.items.push(item);
       } else {
@@ -277,19 +277,22 @@ export class InvoiceComponent {
         });
       }
       return acc;
-    }, [] as { category: string; items: typeof invoiceData }[]);
+    }, [] as { category?: string; items: InvoiceItem }[]);
 
-    groupedData.forEach((row, i) =>{
-      result.push([
-        { colSpan: 8, text: row.category, style: 'tableHeader' },
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-      ]);
+    groupedData.forEach((row, ix) =>{
+      if(row.category){
+
+        result.push([
+          { colSpan: 8, text: row.category, style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+        ]);
+      }
 
       row.items.forEach((row, i) =>
         result.push([
