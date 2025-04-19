@@ -18,4 +18,15 @@ export class InvoiceContactsDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.data.contactImage = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

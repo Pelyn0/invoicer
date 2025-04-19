@@ -7,7 +7,13 @@
         <mat-label>Контакти</mat-label>
         <textarea matInput name="contactsStr" [(ngModel)]="data.contactsStr" rows="7" cols="100"></textarea>
       </mat-form-field>
-
+      <mat-form-field class="invoice-contacts-full-width">
+        <mat-label>Завантажити лого</mat-label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+      </mat-form-field>
+      <div>
+        <img [src]="data.contactImage" style="width: 90px; height: 90px;">
+      </div>
     </div>
   </form>
 </div>

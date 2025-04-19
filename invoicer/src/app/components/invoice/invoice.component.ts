@@ -115,6 +115,7 @@ export class InvoiceComponent {
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
+        "contactImage": this.contactImage,
         "contactsStr": this.contacts.join('\n'),
       },
     });
@@ -122,6 +123,7 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.contacts = result.contactsStr.split('\n');
+        this.contactImage = result.contactImage;
       }
     });
   }
