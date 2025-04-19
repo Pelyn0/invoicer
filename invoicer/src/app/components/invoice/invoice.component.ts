@@ -310,8 +310,39 @@ export class InvoiceComponent {
           `${(row.price * row.quantity) - (row.discount ?? 0)}`,
         ])
       );
-    });
+      
+      let sumCategory = row.items.reduce(
+        (accumulator, row) => accumulator + (row.price * row.quantity),
+        0
+      );
 
+      let discountCategory = row.items.reduce(
+        (accumulator, row) => accumulator + (row.discount ?? 0),
+        0
+      );
+
+      let topayCategory = sumCategory - discountCategory;
+
+      result.push([
+        { colSpan: 5, text: 'Всього:'},
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${sumCategory}`,
+          style: 'tableHeader',
+        },
+        {
+          text: `${discountCategory}`,
+          style: 'tableHeader',
+        },
+        {
+          text: `${topayCategory}`,
+          style: 'tableHeader',
+        },
+      ]);
+    });
 
     let sum = this.invoiceData.reduce(
       (accumulator, row) => accumulator + (row.price * row.quantity),
