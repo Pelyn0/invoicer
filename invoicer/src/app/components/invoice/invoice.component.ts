@@ -27,6 +27,7 @@ export class InvoiceComponent {
       quantity: 2,
       price: 10,
       discount: 0,
+      category: 'Світло'
     },
     {
       title: 'Продукт 2',
@@ -34,6 +35,7 @@ export class InvoiceComponent {
       quantity: 1,
       price: 20,
       discount: 0,
+      category: 'Світло'
     },
     {
       title: 'Продукт 3',
@@ -41,6 +43,7 @@ export class InvoiceComponent {
       quantity: 3,
       price: 5,
       discount: 0,
+      category: 'Світло'
     },
   ];
 
@@ -263,18 +266,45 @@ export class InvoiceComponent {
     );
     result.push(headers);
 
-    this.invoiceData.forEach((row, i) =>
+    let groupedData = this.invoiceData.reduce((acc, item) => {
+      let existingCategory = acc.find(group => group.category === item.category);
+      if (existingCategory) {
+        existingCategory.items.push(item);
+      } else {
+        acc.push({
+          category: item.category,
+          items: [item]
+        });
+      }
+      return acc;
+    }, [] as { category: string; items: typeof invoiceData }[]);
+
+    groupedData.forEach((row, i) =>{
       result.push([
-        `${i + 1}`,
-        row.title,
-        row.manufacturer,
-        `${row.quantity}`,
-        `${row.price}`,
-        `${row.price * row.quantity}`,
-        `${row.discount}`,
-        `${(row.price * row.quantity) - (row.discount ?? 0)}`,
-      ])
-    );
+        { colSpan: 8, text: row.category, style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+      ]);
+
+      row.items.forEach((row, i) =>
+        result.push([
+          `${i + 1}`,
+          row.title,
+          row.manufacturer,
+          `${row.quantity}`,
+          `${row.price}`,
+          `${row.price * row.quantity}`,
+          `${row.discount}`,
+          `${(row.price * row.quantity) - (row.discount ?? 0)}`,
+        ])
+      );
+    });
+
 
     let sum = this.invoiceData.reduce(
       (accumulator, row) => accumulator + (row.price * row.quantity),
@@ -289,7 +319,7 @@ export class InvoiceComponent {
     let topay = sum - discount;
 
     result.push([
-      { colSpan: 5, text: 'Сума:', style: 'tableHeader' },
+      { colSpan: 7, text: 'Сума:', style: 'tableHeader' },
       '',
       '',
       '',
@@ -304,7 +334,7 @@ export class InvoiceComponent {
 
     if(discount > 0){
       result.push([
-        { colSpan: 5, text: 'Знижка:', style: 'tableHeader' },
+        { colSpan:7, text: 'Знижка:', style: 'tableHeader' },
         '',
         '',
         '',
@@ -318,7 +348,7 @@ export class InvoiceComponent {
       ]);
       
       result.push([
-        { colSpan: 5, text: 'До оплати:', style: 'tableHeader' },
+        { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
         '',
         '',
         '',
