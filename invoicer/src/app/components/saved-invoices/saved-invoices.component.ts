@@ -61,6 +61,7 @@ export class SavedInvoicesDialogComponent implements OnInit {
   }
 
   getFileName(name: string) {
+    console.log(name);
     return name.split(/\/(.*)/s)[1];
   }
 

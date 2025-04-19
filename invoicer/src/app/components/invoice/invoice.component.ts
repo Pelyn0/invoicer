@@ -261,6 +261,17 @@ export class InvoiceComponent {
         this.contactImage = invoice.contactImage;
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
+        this.discount = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.discount ?? 0),
+          0
+        );
+
+        this.sum = this.invoiceData.reduce(
+          (accumulator, row) => accumulator + (row.price*row.quantity),
+          0
+        );
+
+        this.topay = this.sum - this.discount;
       }
     });
   }
