@@ -26,18 +26,21 @@ export class InvoiceComponent {
       manufacturer: 'Виробник 1',
       quantity: 2,
       price: 10,
+      discount: 0,
     },
     {
       title: 'Продукт 2',
       manufacturer: 'Виробник 2',
       quantity: 1,
       price: 20,
+      discount: 0,
     },
     {
       title: 'Продукт 3',
       manufacturer: 'Виробник 3',
       quantity: 3,
       price: 5,
+      discount: 0,
     },
   ];
 

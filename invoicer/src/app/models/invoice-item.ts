@@ -3,7 +3,7 @@ export interface InvoiceItem {
   manufacturer: string;
   quantity: number;
   price: number;
-  discount: number = 0;
+  discount?: number;
   selectedCar?: string;
   value?: string;
   category?: string;

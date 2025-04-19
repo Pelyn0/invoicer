@@ -12,6 +12,11 @@
       </mat-form-field>
 
       <mat-form-field class="invoice-item-full-width">
+        <mat-label>Категорія</mat-label>
+        <input matInput [(ngModel)]="data.category" name="category" />
+      </mat-form-field>
+
+      <mat-form-field class="invoice-item-full-width">
         <mat-label>Модель</mat-label>
         <input matInput [(ngModel)]="data.title" name="title" />
       </mat-form-field>
@@ -38,6 +43,39 @@
           min="1"
           [(ngModel)]="data.price"
           name="price"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Сума</mat-label>
+        <input
+          matInput
+          type="number"
+          [value]="data.price * data.quantity"
+          name="sum"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Знижка</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="data.discount"
+          name="discount"
+        />
+      </mat-form-field>
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>До оплати</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [value]="(data.price * data.quantity) - (data.discount ?? 0)"
+          name="topay"
+          readonly
         />
       </mat-form-field>
     </div>
