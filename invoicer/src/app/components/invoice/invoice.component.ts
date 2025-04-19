@@ -490,6 +490,8 @@ export class InvoiceComponent {
     return {
       actions: this.actions,
       invoiceData: this.invoiceData,
+      contactImage: this.contactImage,
+      contacts: this.contacts
     };
   }
 
