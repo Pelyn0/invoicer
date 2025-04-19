@@ -277,7 +277,7 @@ export class InvoiceComponent {
         });
       }
       return acc;
-    }, [] as { category?: string; items: InvoiceItem }[]);
+    }, [] as { category?: string; items: InvoiceItem[] }[]);
 
     groupedData.forEach((row, ix) =>{
       if(row.category){
