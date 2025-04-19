@@ -50,10 +50,12 @@ export class SavedInvoicesDialogComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      this.dialogRef.close({
-        fileName: this.getFileName(name).slice(0, -9),
-        invoice: content,
-      });
+      reader.onload = () => {
+        this.dialogRef.close({
+          fileName: this.getFileName(file.name),
+          invoice: reader.result,
+        });
+      };
     }
   }
 
