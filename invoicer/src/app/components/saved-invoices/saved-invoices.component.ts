@@ -46,6 +46,17 @@ export class SavedInvoicesDialogComponent implements OnInit {
     //}
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      this.dialogRef.close({
+        fileName: this.getFileName(name).slice(0, -9),
+        invoice: content,
+      });
+    }
+  }
+
   getFileName(name: string) {
     return name.split(/\/(.*)/s)[1];
   }

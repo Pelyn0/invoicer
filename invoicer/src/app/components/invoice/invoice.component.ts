@@ -272,6 +272,15 @@ export class InvoiceComponent {
       .createPdf(this.getDocDefinition())
       .download(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
+    const jsonData = JSON.stringify(this.getInvoice()); // Convert the object to JSON string
+    const blob = new Blob([jsonData], { type: 'application/json' }); // Create a Blob from the JSON data
+    const url = window.URL.createObjectURL(blob); // Create an object URL for the Blob
+    const link = document.createElement('a'); // Create an <a> element
+    link.href = url; // Set the href to the Blob object URL
+    link.download = `${this.fileName ? this.fileName : 'Receipt'}.invoicer`; // Set the download file name
+    link.click(); // Programmatically click the link to trigger the download
+    window.URL.revokeObjectURL(url); // Revoke the object URL to clean up
+
     //const containerClient =
     //  this.blobServiceClient.getContainerClient('invoicer');
     //const content = JSON.stringify(this.getInvoice());
