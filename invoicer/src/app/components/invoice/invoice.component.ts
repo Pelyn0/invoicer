@@ -107,6 +107,7 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.invoiceData[i] = result;
+        this.invoiceData.sort((a, b) => a.category.localeCompare(b.category));
         this.table.renderRows();
       }
     });
@@ -150,6 +151,7 @@ export class InvoiceComponent {
       if (result) {
 
         this.invoiceData.push(result);
+        this.invoiceData.sort((a, b) => a.category.localeCompare(b.category));
         this.table.renderRows();
       }
     });
@@ -278,6 +280,8 @@ export class InvoiceComponent {
       }
       return acc;
     }, [] as { category?: string; items: InvoiceItem[] }[]);
+
+    groupedData.sort((a, b) => a.category.localeCompare(b.category));
 
     groupedData.forEach((row, ix) =>{
       if(row.category){
