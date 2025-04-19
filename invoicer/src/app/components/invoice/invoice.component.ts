@@ -238,7 +238,7 @@ export class InvoiceComponent {
 
     result.content.push({
       table: {
-        widths: ['auto', '*', '*', 'auto', 'auto', 'auto'],
+        widths: ['auto', '*', '*', 'auto', 'auto', 'auto','auto','auto'],
         body: this.getTableBodyForPdf(),
       },
     } as any);
@@ -277,12 +277,21 @@ export class InvoiceComponent {
     );
 
     let sum = this.invoiceData.reduce(
-      (accumulator, row) => accumulator + row.price * row.quantity,
+      (accumulator, row) => accumulator + (row.price * row.quantity),
       0
     );
 
+    let discount = this.invoiceData.reduce(
+      (accumulator, row) => accumulator + (row.discount ?? 0),
+      0
+    );
+
+    let topay = sum - discount;
+
     result.push([
       { colSpan: 5, text: 'Сума:', style: 'tableHeader' },
+      '',
+      '',
       '',
       '',
       '',
@@ -293,27 +302,31 @@ export class InvoiceComponent {
       },
     ]);
 
-    if(this.discount > 0){
+    if(discount > 0){
       result.push([
         { colSpan: 5, text: 'Знижка:', style: 'tableHeader' },
         '',
         '',
         '',
         '',
+        '',
+        '',
         {
-          text: `${this.discount}`,
+          text: `${discount}`,
           style: 'tableHeader',
         },
       ]);
       
       result.push([
-        { colSpan: 5, text: 'Сума зі знижкою:', style: 'tableHeader' },
+        { colSpan: 5, text: 'До оплати:', style: 'tableHeader' },
+        '',
+        '',
         '',
         '',
         '',
         '',
         {
-          text: `${sum - this.discount}`,
+          text: `${topay}`,
           style: 'tableHeader',
         },
       ]);
