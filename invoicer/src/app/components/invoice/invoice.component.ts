@@ -144,6 +144,7 @@ export class InvoiceComponent {
         price: 1,
         quantity: 1,
         selectedCar: '-1',
+        discount: '0',
       },
     });
 
