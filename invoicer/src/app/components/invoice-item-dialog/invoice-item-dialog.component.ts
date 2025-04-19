@@ -36,116 +36,132 @@ export class InvoiceItemDialogComponent implements OnInit {
 
   cars: InvoiceItem[] = [
     {
-      value: '1',
-      title: 'Рухома голова 3 в 1',
-      manufacturer: 'PowerLight HotBeam BS 360',
-      quantity: 12,
-      price: 1600
+      "value": "1",
+      "title": "Рухома голова 3 в 1",
+      "manufacturer": "PowerLight HotBeam BS 360",
+      "quantity": 12,
+      "price": 1600,
+      "category": "Динамічні світлові прилади"
     },
     {
-      value: '2',
-      title: 'Світлодіодна матрична панель',
-      manufacturer: 'Pro Lux MATRIX BAR 6 RGBWA',
-      quantity: 8,
-      price: 650
+      "value": "6",
+      "title": "DMX Спліттер",
+      "manufacturer": "Eurolite DMX Split 4 Mini",
+      "quantity": 1,
+      "price": 280,
+      "category": "Прилади управління світловим обладнанням"
     },
     {
-      value: '3',
-      title: 'Світлодіодний LED прожектор',
-      manufacturer: 'ProLux LUX LED PAR 1818',
-      quantity: 19,
-      price: 350
+      "value": "10",
+      "title": "Інтерфейс управління освітленням",
+      "manufacturer": "SUNLITE SUITE2-FC",
+      "quantity": 1,
+      "price": 800,
+      "category": "Прилади управління світловим обладнанням"
     },
     {
-      value: '4',
-      title: 'Світлодіодний прожектор',
-      manufacturer: 'Free Color COB200 White',
-      quantity: 2,
-      price: 600
+      "value": "11",
+      "title": "Ферма алюмінієва Квадролайт 4L",
+      "manufacturer": "MTK Truss 2 м",
+      "quantity": 12,
+      "price": 750,
+      "category": "Сценічне обладнання"
     },
     {
-      value: '5',
-      title: 'Світловий ефект',
-      manufacturer: 'Free Color FLASH 2',
-      quantity: 10,
-      price: 550
+      "value": "7",
+      "title": "Дзеркальна куля 50 см.",
+      "manufacturer": "",
+      "quantity": 1,
+      "price": 1500,
+      "category": "Сценічне обладнання"
     },
     {
-      value: '6',
-      title: 'DMX Спліттер',
-      manufacturer: 'Eurolite DMX Split 4 Mini',
-      quantity: 1,
-      price: 280
+      "value": "8",
+      "title": "Мотор для дзеркальної кулі",
+      "manufacturer": "Stairville MBM40D Mirror",
+      "quantity": 1,
+      "price": 370,
+      "category": "Сценічне обладнання"
     },
     {
-      value: '7',
-      title: 'Дзеркальна куля 50 см.',
-      manufacturer: '',
-      quantity: 1,
-      price: 1500
+      "value": "12",
+      "title": "Нижня основа під ферму",
+      "manufacturer": "Gravity",
+      "quantity": 12,
+      "price": 350,
+      "category": "Сценічне обладнання"
     },
     {
-      value: '8',
-      title: 'Мотор для дзеркальної кулі',
-      manufacturer: 'Stairville MBM40D Mirror',
-      quantity: 1,
-      price: 370
+      "value": "16",
+      "title": "Генератор туману",
+      "manufacturer": "Pro Lux Tour Haze",
+      "quantity": 1,
+      "price": 1200,
+      "category": "Сценічне обладнання"
     },
     {
-      value: '9',
-      title: 'Стійка для світлового обладнання',
-      manufacturer: 'GRAVITY LS 431 B',
-      quantity: 2,
-      price: 320
+      "value": "13",
+      "title": "Електрична підстанція розгалужуюча 3-х фазна",
+      "manufacturer": "PCE - 32 А",
+      "quantity": 1,
+      "price": 1250,
+      "category": "Силова та сигнальна комутація"
     },
     {
-      value: '10',
-      title: 'Інтерфейс управління освітленням',
-      manufacturer: 'SUNLITE SUITE2-FC',
-      quantity: 1,
-      price: 800
+      "value": "14",
+      "title": "Кабель прорезинений силовий",
+      "manufacturer": "Titanex",
+      "quantity": 10,
+      "price": 20,
+      "category": "Силова та сигнальна комутація"
     },
     {
-      value: '11',
-      title: 'Ферма алюмінієва Квадролайт 4L',
-      manufacturer: 'MTK Truss 2 м',
-      quantity: 12,
-      price: 750
+      "value": "15",
+      "title": "Кабель-канал для захисту кабеля",
+      "manufacturer": "ProLux Cross 2",
+      "quantity": 10,
+      "price": 140,
+      "category": "Силова та сигнальна комутація"
     },
     {
-      value: '12',
-      title: 'Нижня основа під ферму',
-      manufacturer: 'Gravity',
-      quantity: 12,
-      price: 350
+      "value": "9",
+      "title": "Стійка для світлового обладнання",
+      "manufacturer": "GRAVITY LS 431 B",
+      "quantity": 2,
+      "price": 320,
+      "category": "Стійки світлові"
     },
     {
-      value: '13',
-      title: 'Електрична підстанція розгалужуюча 3-х фазна',
-      manufacturer: 'PCE - 32 А',
-      quantity: 1,
-      price: 1250
+      "value": "2",
+      "title": "Світлодіодна матрична панель",
+      "manufacturer": "Pro Lux MATRIX BAR 6 RGBWA",
+      "quantity": 8,
+      "price": 650,
+      "category": "Статичні прилади"
     },
     {
-      value: '14',
-      title: 'Кабель прорезинений силовий',
-      manufacturer: 'Titanex',
-      quantity: 10,
-      price: 20
+      "value": "3",
+      "title": "Світлодіодний LED прожектор",
+      "manufacturer": "ProLux LUX LED PAR 1818",
+      "quantity": 19,
+      "price": 350,
+      "category": "Статичні прилади"
     },
     {
-      value: '15',
-      title: 'Кабель-канал для захисту кабеля',
-      manufacturer: 'ProLux Cross 2',
-      quantity: 10,
-      price: 140
+      "value": "4",
+      "title": "Світлодіодний прожектор",
+      "manufacturer": "Free Color COB200 White",
+      "quantity": 2,
+      "price": 600,
+      "category": "Статичні прилади"
     },
     {
-      value: '16',
-      title: 'Генератор туману',
-      manufacturer: 'Pro Lux Tour Haze',
-      quantity: 1,
-      price: 1200
-    }
+      "value": "5",
+      "title": "Світловий ефект",
+      "manufacturer": "Free Color FLASH 2",
+      "quantity": 10,
+      "price": 550,
+      "category": "Динамічні світлові прилади"
+    },
   ];
 }
