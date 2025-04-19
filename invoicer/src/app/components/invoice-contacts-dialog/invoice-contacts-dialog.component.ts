@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
   templateUrl: './invoice-contacts-dialog.component.html',
   styleUrls: ['./invoice-contacts-dialog.component.css'],
 })
-export class InvoiceСontactsDialogComponent implements OnInit {
+export class InvoiceContactsDialogComponent implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<InvoiceСontactsDialogComponent>,
+    public dialogRef: MatDialogRef<InvoiceContactsDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any
   ) {
