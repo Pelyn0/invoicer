@@ -253,7 +253,7 @@ export class InvoiceComponent {
 
     result.content.push({
       table: {
-        widths: ['*','*','*','*','*','*'],
+        widths: ['*','*'],
         body: [
           [
             {
@@ -265,22 +265,23 @@ export class InvoiceComponent {
               alignment: 'left',
               margin: [0, 0, 0, 0]
             },
-            '',
-            '',
             {
-              width: '*',
-              stack: this.contacts,
-              style: 'header',
-              alignment: 'right'
-            },
-            '',
-            {
-              width: 'auto',
-              image: this.contactImage,
-              fit: [90, 90],
-              margin: [0, 0, 0, 30],
-              alignment: 'right',
-              verticalAlignment: 'middle'
+              columns: [
+                {
+                  width: '*',
+                  stack: this.contacts,
+                  style: 'header',
+                  alignment: 'right'
+                },
+                {
+                  width: 'auto',
+                  image: this.contactImage,
+                  fit: [90, 90],
+                  margin: [0, 0, 0, 30],
+                  alignment: 'right',
+                  verticalAlignment: 'middle'
+                }
+              ]
             }
           ]
         ]
