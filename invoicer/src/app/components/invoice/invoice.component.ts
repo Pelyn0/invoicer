@@ -257,6 +257,8 @@ export class InvoiceComponent {
         let invoice = JSON.parse(result.invoice) as Invoice;
 
         this.invoiceData = invoice.invoiceData as InvoiceItem[];
+        this.contacts = invoice.contacts;
+        this.contactImage = invoicer.contactImage;
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
       }

@@ -50,13 +50,13 @@ export class SavedInvoicesDialogComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
+      reader.readAsText(file);
       reader.onload = () => {
         this.dialogRef.close({
           fileName: this.getFileName(file.name),
-          invoice: reader.result,
+          invoice: reader.result as string,
         });
       };
-      reader.readAsDataURL(file);
     }
   }
 
