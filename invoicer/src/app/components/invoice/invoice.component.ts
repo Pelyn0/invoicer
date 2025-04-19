@@ -19,7 +19,10 @@ export class InvoiceComponent {
   //blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
   fileName: string = '';
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
-  discount: number = 0;
+  discount: number = this.invoiceData.reduce(
+    (accumulator, row) => accumulator + (row.discount ?? 0),
+    0
+  );
   contacts: string[] = [
     'Event – Агенція «ВОлЮр»',
     'Звукове, світлове та сценічне обладння',
@@ -148,7 +151,6 @@ export class InvoiceComponent {
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
-        discount: this.discount,
         ...action,
       },
     });
@@ -156,7 +158,6 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions[i] = result.action;
-        this.discount = result.discount;
       }
     });
   }
@@ -192,7 +193,6 @@ export class InvoiceComponent {
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
-        discount: this.discount,
         action: '',
       },
     });
@@ -200,7 +200,6 @@ export class InvoiceComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions.push(result.action);
-        this.discount = result.discount;
       }
     });
   }
