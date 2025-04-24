@@ -57,7 +57,7 @@ export class InvoiceComponent {
     },
   ];
   discount: number = this.invoiceData.reduce(
-    (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
+    (accumulator, row) => accumulator + (Number(row.discount) || 0),
     0
   );
   sum: number = this.invoiceData.reduce(
@@ -105,7 +105,7 @@ export class InvoiceComponent {
     {
       columnDef: 'topay',
       header: 'До оплати, грн',
-      cell: (element: InvoiceItem) => `${(element.price * element.quantity) - (element.discount ?? 0)}`,
+      cell: (element: InvoiceItem) => `${(element.price * element.quantity) - (Number(row.discount) || 0)}`,
     },
   ];
   displayedColumns = this.columns.map((c) => c.columnDef).concat('category').concat('action');
@@ -149,7 +149,7 @@ export class InvoiceComponent {
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
+          (accumulator, row) => accumulator + (Number(row.discount) || 0),
           Number(0)
         );
         
@@ -205,7 +205,7 @@ export class InvoiceComponent {
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => Number(accumulator) + (Number(row.discount) ?? 0),
+          (accumulator, row) => Number(accumulator) + (Number(row.discount) || 0),
           0
         );
 
@@ -262,7 +262,7 @@ export class InvoiceComponent {
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => {accumulator + (Number(row.discount) ?? 0); console.log(accumulator); return accumulator},
+          (accumulator, row) => {accumulator = accumulator + (Number(row.discount) || 0); console.log(accumulator); return accumulator},
           0
         );
 
@@ -403,7 +403,7 @@ export class InvoiceComponent {
           `${row.price}`,
           `${row.price * row.quantity}`,
           `${row.discount}`,
-          `${(row.price * row.quantity) - (row.discount ?? 0)}`,
+          `${(row.price * row.quantity) - (Number(row.discount) || 0)}`,
         ])
       );
       
@@ -413,7 +413,7 @@ export class InvoiceComponent {
       );
 
       let discountCategory = row.items.reduce(
-        (accumulator, row) => accumulator + (row.discount ?? 0),
+        (accumulator, row) => accumulator + (Number(row.discount) || 0),
         0
       );
 
@@ -446,7 +446,7 @@ export class InvoiceComponent {
     );
 
     let discount = this.invoiceData.reduce(
-      (accumulator, row) => accumulator + (row.discount ?? 0),
+      (accumulator, row) => accumulator + (Number(row.discount) || 0),
       0
     );
 
