@@ -149,8 +149,8 @@ export class InvoiceComponent {
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => accumulator + (row.discount ?? 0),
-          0
+          (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
+          Number(0)
         );
         
         this.sum = this.invoiceData.reduce(
@@ -205,7 +205,7 @@ export class InvoiceComponent {
         this.invoiceData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => accumulator + (row.discount ?? 0),
+          (accumulator, row) => Number(accumulator) + (Number(row.discount) ?? 0),
           0
         );
 
@@ -262,7 +262,7 @@ export class InvoiceComponent {
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => accumulator + (row.discount ?? 0),
+          (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
           0
         );
 
