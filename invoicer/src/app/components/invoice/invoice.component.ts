@@ -57,7 +57,7 @@ export class InvoiceComponent {
     },
   ];
   discount: number = this.invoiceData.reduce(
-    (accumulator, row) => accumulator + (row.discount ?? 0),
+    (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
     0
   );
   sum: number = this.invoiceData.reduce(
@@ -262,7 +262,7 @@ export class InvoiceComponent {
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => accumulator + (Number(row.discount) ?? 0),
+          (accumulator, row) => {accumulator + (Number(row.discount) ?? 0); console.log(accumulator); return accumulator},
           0
         );
 
