@@ -31,6 +31,10 @@ export class InvoiceItemDialogComponent implements OnInit {
       this.data.category = selected?.category;
     }
   }
+  
+  onDiscountPercentsChanged(newValue: string) {
+    this.data.discount = this.data.price * ((Number(newValue) || 0)/100); 
+  }
 
   cars: InvoiceItem[] = [
     {

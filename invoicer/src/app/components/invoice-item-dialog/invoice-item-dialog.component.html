@@ -58,6 +58,17 @@
       </mat-form-field>
 
       <mat-form-field class="invoice-item-full-width">
+        <mat-label>Знижка в відсотках</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [value]="(data.discount/data.price)*100"
+          name="discountPercents"
+          (ngModelChange)="onDiscountPercentsChanged($event)"
+        />
+      </mat-form-field>
+      <mat-form-field class="invoice-item-full-width">
         <mat-label>Знижка</mat-label>
         <input
           matInput
@@ -65,8 +76,10 @@
           min="0"
           [(ngModel)]="data.discount"
           name="discount"
+          readonly
         />
       </mat-form-field>
+      
       <mat-form-field class="invoice-item-full-width">
         <mat-label>До оплати</mat-label>
         <input
