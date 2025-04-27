@@ -17,7 +17,7 @@ export class InvoiceItemDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data.discountPercents = ((Number(this.data.discount) || 0) / this.data.price) * 100;
+    this.data.discountPercents = ((Number(this.data.discount) || 0) / (this.data.quantity*this.data.price)) * 100;
   }
   
   onNoClick(): void {
