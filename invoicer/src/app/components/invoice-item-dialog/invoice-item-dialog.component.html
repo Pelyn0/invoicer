@@ -63,7 +63,7 @@
           matInput
           type="number"
           min="0"
-          [value]="(data.discount/data.price)*100"
+          [ngModel]="data.discountPercents"
           name="discountPercents"
           (ngModelChange)="onDiscountPercentsChanged($event)"
         />

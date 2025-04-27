@@ -379,6 +379,15 @@ export class InvoiceComponent {
 
     groupedData.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
 
+    // Now move the specific category to the end
+    const categoryToMove = 'Робота персоналу'; // <- change this to the category you want
+    const index = groupedData.findIndex(group => group.category === categoryToMove);
+
+    if (index !== -1) {
+      const [itemToMove] = groupedData.splice(index, 1); // remove it
+      groupedData.push(itemToMove); // add it at the end
+    }
+
     groupedData.forEach((row, ix) =>{
       if(row.category){
 
