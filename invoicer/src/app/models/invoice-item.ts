@@ -7,4 +7,5 @@ export interface InvoiceItem {
   selectedCar?: string;
   value?: string;
   category?: string;
+  discountPercents?: number;
 }
