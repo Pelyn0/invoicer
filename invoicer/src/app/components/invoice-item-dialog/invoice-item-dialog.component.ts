@@ -52,8 +52,7 @@ export class InvoiceItemDialogComponent implements OnInit {
             .map(c => c.category)
             .filter((cat): cat is string => typeof cat === 'string')
         )
-      ].filter(option => option.toLowerCase().includes(value.toLowerCase())
-    );
+      ].filter(option => option?.toLowerCase().includes(value.toLowerCase()) ?? true);
   }
   
   onDiscountPercentsChanged(newValue: number) {
