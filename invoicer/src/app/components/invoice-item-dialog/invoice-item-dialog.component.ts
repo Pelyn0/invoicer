@@ -40,7 +40,7 @@ export class InvoiceItemDialogComponent implements OnInit {
   }
 
   onSelectedCategoryChanged(value: string) {
-    this.filteredCategories = this.cars.select(c => c.category).filter(option =>
+    this.filteredCategories = [...new Set(this.cars.map(c => c.category))].filter(option =>
       option.toLowerCase().includes(value.toLowerCase())
     );
   }
