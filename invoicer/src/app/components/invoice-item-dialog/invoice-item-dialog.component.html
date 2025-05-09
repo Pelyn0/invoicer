@@ -4,16 +4,16 @@
     <div class="flex-inputs">
       
       <mat-form-field class="invoice-item-full-width">
-        <mat-label>Вибрати</mat-label>
-        <select matNativeControl [(ngModel)]="data.selectedCar" name="Choose" (ngModelChange)="onSelectedCarChanged($event)">
-          <option value="-1" selected>Свій елемент</option>
-          <option *ngFor="let car of cars;" [value]="car.value">{{car.category}}: {{car.title}} - {{car.manufacturer}}</option>
-        </select>
+        <mat-label>Категорія</mat-label>
+        <input matInput [(ngModel)]="data.category" name="category" />
       </mat-form-field>
 
       <mat-form-field class="invoice-item-full-width">
-        <mat-label>Категорія</mat-label>
-        <input matInput [(ngModel)]="data.category" name="category" />
+        <mat-label>Вибрати</mat-label>
+        <select matNativeControl [(ngModel)]="data.selectedCar" name="Choose" (ngModelChange)="onSelectedCarChanged($event)">
+          <option value="-1" selected>Свій елемент</option>
+          <option *ngFor="let car of filteredItems();" [value]="car.value">{{car.category}}: {{car.title}} - {{car.manufacturer}}</option>
+        </select>
       </mat-form-field>
 
       <mat-form-field class="invoice-item-full-width">

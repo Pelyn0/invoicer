@@ -40,6 +40,15 @@ export class InvoiceItemDialogComponent implements OnInit {
     this.data.discount = this.data.quantity*(this.data.price * ((Number(newValue) || 0)/100)); 
   }
 
+  filteredItems() {
+    if (!this.data.category) {
+      return this.cars;
+    }
+    return this.cars.filter(car =>
+      car.category?.toLowerCase().includes(this.data.category?.toLowerCase() ?? '') ?? true
+    );
+  }
+
   cars: InvoiceItem[] = [
     {
       "value": "1",
