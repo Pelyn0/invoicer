@@ -20,7 +20,7 @@ export class InvoiceItemDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.discountPercents = ((Number(this.data.discount) || 0) / (this.data.quantity*this.data.price)) * 100;
-    this.filteredCategories = [...new Set(this.cars.map(c => c.category))];
+    this.filteredCategories = [...new Set(this.cars.map(c => c.category).filter(Boolean))];
   }
   
   onNoClick(): void {
@@ -40,7 +40,7 @@ export class InvoiceItemDialogComponent implements OnInit {
   }
 
   onSelectedCategoryChanged(value: string) {
-    this.filteredCategories = [...new Set(this.cars.map(c => c.category))].filter(option =>
+    this.filteredCategories = [...new Set(this.cars.map(c => c.category).filter(Boolean))].filter(option =>
       option.toLowerCase().includes(value.toLowerCase())
     );
   }
