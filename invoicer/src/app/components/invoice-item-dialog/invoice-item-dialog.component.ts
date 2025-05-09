@@ -9,7 +9,7 @@ import { InvoiceItem } from 'src/app/models/invoice-item';
   styleUrls: ['./invoice-item-dialog.component.css'],
 })
 export class InvoiceItemDialogComponent implements OnInit {
-  filteredCategories: string[];
+  filteredCategories: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<InvoiceItemDialogComponent>,
@@ -20,7 +20,7 @@ export class InvoiceItemDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.discountPercents = ((Number(this.data.discount) || 0) / (this.data.quantity*this.data.price)) * 100;
-    this.filteredCategories = this.cars.select(c => c.category);
+    this.filteredCategories = [...new Set(this.cars.map(c => c.category))];
   }
   
   onNoClick(): void {
