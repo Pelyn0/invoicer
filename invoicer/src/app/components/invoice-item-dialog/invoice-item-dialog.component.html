@@ -17,7 +17,7 @@
         <mat-label>Вибрати</mat-label>
         <select matNativeControl [(ngModel)]="data.selectedCar" name="Choose" (ngModelChange)="onSelectedCarChanged($event)">
           <option value="-1" selected>Свій елемент</option>
-          <option *ngFor="let car of filteredItems();" [value]="car.value">{{car.category}}: {{car.title}} - {{car.manufacturer}}</option>
+          <option *ngFor="let car of filteredItems();" [value]="car.value">{{car.title}} - {{car.manufacturer}} - {{car.category}}</option>
         </select>
       </mat-form-field>
 
