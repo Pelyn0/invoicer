@@ -507,7 +507,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       "manufacturer": "iTech T1028TE",
       "quantity": 1,
       "discount": 0,
-      "price": 2300,
+      "price": 350,
       "category": "Мультимедіа"
     },
     {
