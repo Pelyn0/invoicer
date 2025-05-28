@@ -32,9 +32,13 @@ export class AppComponent implements OnInit {
   }
 
   setCookie(name: string, value: string, days: number) {
+    const encoder = new TextEncoder();
+    const buffer = encoder.encode(value);
+
+    let key = toBase64(buffer);
     const d = new Date();
     d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+    document.cookie = `${name}=${key};expires=${d.toUTCString()};path=/`;
   }
 
   getCookie(name: string): string | null {
@@ -43,7 +47,7 @@ export class AppComponent implements OnInit {
     for (const c of ca) {
       const trimmed = c.trim();
       if (trimmed.indexOf(nameEQ) === 0) {
-        return trimmed.substring(nameEQ.length);
+        return atob(trimmed.substring(nameEQ.length));
       }
     }
     return null;
@@ -66,7 +70,11 @@ async function hmacSha512Base64(message: string): Promise<string> {
   const signature = await crypto.subtle.sign('HMAC', cryptoKey, messageData);
 
   // Convert ArrayBuffer to Base64
-  const bytes = new Uint8Array(signature);
+  return toBase64(signature);
+}
+
+function toBase64(text: ArrayBuffer): string {
+  const bytes = new Uint8Array(text);
   const binary = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
   return btoa(binary);
 }
