@@ -1,7 +1,7 @@
 <div *ngIf="!accessGranted">
   <h2>Введіть ключ доступу</h2>
-  <input [(ngModel)]="accessKey" placeholder="Введіть ключ тут..." />
-  <button (click)="onSubmit()">Ввійти</button>
+  <input matInput [(ngModel)]="accessKey" placeholder="Введіть ключ тут..." type="password" />
+  <button mat-raised-button (click)="onSubmit()">Ввійти</button>
 </div>
 
 <div *ngIf="accessGranted">
