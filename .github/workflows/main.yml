@@ -31,6 +31,6 @@ jobs:
           DEMO_KEY: ${{secrets.DEMO_KEY }}
         run: |
           echo "export const environment = {" > src/environment.ts
-          echo "  apiKey: '${{ secrets.DEMO_KEY }}'" >> src/environment.ts
+          echo "  demoKey: '${{ secrets.DEMO_KEY }}'" >> src/environment.ts
           echo "};" >> src/environment.ts
           npm run ng -- deploy --base-href=/invoicer/ --name="Pelyn0" --email="tarasfall@gmail.com"
