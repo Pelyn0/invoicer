@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InvoiceItem } from 'src/app/models/invoice-item';
+import { environment } from 'src/environment';
 
 @Component({
   selector: 'app-invoice-action-dialog',
@@ -12,7 +13,9 @@ export class InvoiceActionDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<InvoiceActionDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any
-  ) {}
+  ) {
+    console.log(environment.demoKey);
+  }
   ngOnInit(): void {}
   onNoClick(): void {
     this.dialogRef.close();
