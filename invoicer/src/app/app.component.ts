@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   async isKeyValid(key: string): Promise<boolean> {
-    return environment.demoKey === await hmacSha512Base64(key);
+    return environment.demoKey.split(';').includes(await hmacSha512Base64(key));
   }
 
   setCookie(name: string, value: string, days: number) {
