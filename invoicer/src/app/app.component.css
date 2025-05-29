@@ -1,29 +1,22 @@
 
-:host {
+.login {
 display: flex;
 justify-content: center;
 margin: 100px 0px;
 }
 
-.mat-form-field {
+.mat-form-field.login {
 width: 100%;
 min-width: 300px;
 }
 
-mat-card-title,
-mat-card-content {
+mat-card-title.login,
+mat-card-content.login {
 display: flex;
 justify-content: center;
 }
 
-.error {
-padding: 16px;
-width: 300px;
-color: white;
-background-color: red;
-}
-
-.button {
+.button.login {
 display: flex;
 justify-content: flex-end;
 }
