@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AllModule } from './components/all.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
