@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { InvoiceItem } from 'src/app/models/invoice-item';
+import { Rights } from 'src/app/models/rights';
+import { Auth } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-invoice-item-dialog',
@@ -18,7 +20,17 @@ export class InvoiceItemDialogComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    let role = await Auth();
+
+    switch(role){
+      case Rights.gen1:
+        this.cars = this.cars_gen1;
+        break;
+      default:
+        this.cars = this.cars_demo;
+    }
+    
     this.data.discountPercents = ((Number(this.data.discount) || 0) / (this.data.quantity*this.data.price)) * 100;
     this.filteredCategories = [
       ...new Set(
@@ -68,7 +80,28 @@ export class InvoiceItemDialogComponent implements OnInit {
     );
   }
 
-  cars: InvoiceItem[] = [
+  cars_demo: InvoiceItem[] = [
+    {
+      "value": "1",
+      "title": "Електрогенератор",
+      "manufacturer": "Honda",
+      "quantity": 1,
+      "discount": 0,
+      "price": 500,
+      "category": "Енергетика"
+    },
+    {
+      "value": "2",
+      "title": "Лед лампа",
+      "manufacturer": "COB",
+      "quantity": 1,
+      "discount": 0,
+      "price": 200,
+      "category": "Прилади"
+    },
+  ];
+
+  cars_gen1: InvoiceItem[] = [
     {
       "value": "1",
       "title": "Електрогенератор",
@@ -835,4 +868,6 @@ export class InvoiceItemDialogComponent implements OnInit {
       "category": "Звук"
     }
   ];
+
+  cars: InvoiceItem[] = this.cars_demo;
 }
