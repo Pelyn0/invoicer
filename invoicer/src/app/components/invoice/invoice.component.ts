@@ -335,7 +335,17 @@ export class InvoiceComponent implements OnInit{
   }
 
   getDocDefinition(): any {
-    let result = { content: [] as any[], styles: {} };
+    let result = 
+    { 
+      content: [] as any[],
+      styles: {},
+      background: {
+          image: this.contactImage,
+          width: 400,
+          opacity: 0.1,
+          absolutePosition: { x: 100, y: 200 }
+      }
+    };
 
     result.content.push({
       table: {
