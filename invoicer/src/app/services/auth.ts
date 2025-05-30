@@ -1,12 +1,26 @@
 import { environment } from "src/environment";
+import { Rights } from "../models/rights";
 
-export async function Auth() {
+export async function Auth() : Promise<Rights> {
     const savedKey = getCookie('access_key');
-
-    if (savedKey && await isKeyValid(savedKey)) {
-    } else {
-      alert('Помилка авторизації!');
+    
+    if(savedKey){
+        let index = await GetValidKeyIndex(savedKey);
+        if (index > 0) {
+            return index;
+        } else {
+            alert('Помилка авторизації!');
+            return Rights.unknown;
+        }
     }
+    
+    alert('Помилка авторизації!');
+
+    return Rights.unknown
+}
+
+async function GetValidKeyIndex(key: string): Promise<number> {
+    return environment.demoKey.split(';').indexOf(await hmacSha512Base64(key)) + 1;
 }
 
 async function isKeyValid(key: string): Promise<boolean> {

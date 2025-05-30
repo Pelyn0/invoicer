@@ -1,6 +1,6 @@
 <div class="tools">
   <button mat-raised-button (click)="open()">Відкрити збережений</button>
-  <button mat-raised-button (click)="changeContacts()">Змінити контакти</button>
+  <button mat-raised-button *ngIf="(authCheck$ | async) == 2" (click)="changeContacts()">Змінити контакти</button>
   <button mat-raised-button (click)="add()">Додати елемент</button>
   <button mat-raised-button (click)="addAction()">Додати дію</button>
   <div class="save">

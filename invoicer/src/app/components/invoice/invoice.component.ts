@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { BlobServiceClient } from '@azure/storage-blob';
@@ -9,14 +9,19 @@ import { InvoiceContactsDialogComponent } from '../invoice-contacts-dialog/invoi
 import { SavedInvoicesDialogComponent } from '../saved-invoices/saved-invoices.component';
 import { InvoiceActionDialogComponent } from '../invoice-action-dialog/invoice-action-dialog.component';
 import { Invoice } from 'src/app/models/invoice';
+import { Auth } from 'src/app/services/auth';
+import { Rights } from 'src/app/models/rights';
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css'],
 })
-export class InvoiceComponent {
+export class InvoiceComponent implements OnInit{
   //blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
+
+  authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);;
+
   fileName: string = '';
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
 
@@ -113,6 +118,10 @@ export class InvoiceComponent {
   @ViewChild(MatTable) table!: MatTable<InvoiceItem>;
 
   constructor(public dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.authCheck$ = Auth();
+  }
 
   changeContacts(){
     let contacts: string[] = this.contacts ;
