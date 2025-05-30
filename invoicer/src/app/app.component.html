@@ -1,15 +1,15 @@
 <div *ngIf="!accessGranted" class="login">
     <mat-card>
-            <mat-card-title class="login">Введіть ключ доступу</mat-card-title>
-        <mat-card-content class="login">
+            <mat-card-title class="loginc">Введіть ключ доступу</mat-card-title>
+        <mat-card-content class="loginc">
         <form>
             <p>
-            <mat-form-field class="login">
+            <mat-form-field class="loginf">
                 <input matInput [(ngModel)]="accessKey" placeholder="Ключ доступу..." type="password" />
             </mat-form-field>
             </p>
 
-            <div class="button login">
+            <div class="button loginb">
                 <button mat-raised-button (click)="onSubmit()">Ввійти</button>
             </div>
 

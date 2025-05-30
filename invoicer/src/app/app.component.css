@@ -5,18 +5,18 @@ justify-content: center;
 margin: 100px 0px;
 }
 
-.mat-form-field.login {
+.mat-form-field.loginf {
 width: 100%;
 min-width: 300px;
 }
 
-mat-card-title.login,
+mat-card-title.loginc,
 mat-card-content.login {
 display: flex;
 justify-content: center;
 }
 
-.button.login {
+.button.loginb {
 display: flex;
 justify-content: flex-end;
 }
