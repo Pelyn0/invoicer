@@ -515,9 +515,7 @@ export class InvoiceComponent implements OnInit{
       0
     );
 
-    let prepaidlocal = this.prepaid ?? 0;
-
-    let topay = sum - discount - prepaidlocal;
+    let topay = sum - discount - (this.prepaid ?? 0);
 
     result.push([
       { colSpan: 7, text: 'Сума:', style: 'tableHeader' },
@@ -548,7 +546,7 @@ export class InvoiceComponent implements OnInit{
         },
       ]);
       
-      if(prepaidlocal > 0){
+      if(this.prepaid ?? 0){
  
         result.push([
           { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
@@ -559,7 +557,7 @@ export class InvoiceComponent implements OnInit{
           '',
           '',
           {
-            text: `${prepaidlocal}`,
+            text: `${this.prepaid}`,
             style: 'tableHeader',
           },
         ]);
