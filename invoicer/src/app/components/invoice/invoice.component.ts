@@ -200,7 +200,7 @@ export class InvoiceComponent implements OnInit{
 
   editAction(i: number) {
     let action: any = { action: this.actions[i] };
-    let prepaid: any = {this.prepaid: this.prepaid };
+    let prepaid: any = { prepaid: this.prepaid };
     const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
       width: '75vw',
       enterAnimationDuration: '25ms',
@@ -258,7 +258,7 @@ export class InvoiceComponent implements OnInit{
   }
 
   addAction() {
-    let prepaid: any = {this.prepaid: this.prepaid };
+    let prepaid: any = { prepaid: this.prepaid };
     const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
       width: '75vw',
       enterAnimationDuration: '25ms',
