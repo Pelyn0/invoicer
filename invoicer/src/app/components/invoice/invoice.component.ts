@@ -549,23 +549,8 @@ export class InvoiceComponent implements OnInit{
       
     if((this.prepaid ?? 0) > 0){
  
-        result.push([
-          { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          {
-            text: `${this.prepaid}`,
-            style: 'tableHeader',
-          },
-        ]);
-      }
-
       result.push([
-        { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
+        { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
         '',
         '',
         '',
@@ -573,11 +558,25 @@ export class InvoiceComponent implements OnInit{
         '',
         '',
         {
-          text: `${topay}`,
+          text: `${this.prepaid}`,
           style: 'tableHeader',
         },
       ]);
     }
+
+    result.push([
+      { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      {
+        text: `${topay}`,
+        style: 'tableHeader',
+      },
+    ]);
 
     return result;
   }
