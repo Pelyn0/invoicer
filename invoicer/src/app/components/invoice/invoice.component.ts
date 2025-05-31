@@ -214,7 +214,9 @@ export class InvoiceComponent implements OnInit{
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions[i] = result.action;
+        
         this.prepaid = result.prepaid;
+        this.topay = this.sum - this.discount - (this.prepaid ?? 0);
       }
     });
   }
@@ -271,8 +273,13 @@ export class InvoiceComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.actions.push(result.action);
+        if(result.action){
+          this.actions.push(result.action);
+        }
+
         this.prepaid = result.prepaid;
+        
+        this.topay = this.sum - this.discount - (this.prepaid ?? 0);
       }
     });
   }
