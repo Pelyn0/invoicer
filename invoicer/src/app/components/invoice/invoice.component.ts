@@ -20,6 +20,8 @@ import { Rights } from 'src/app/models/rights';
 export class InvoiceComponent implements OnInit{
   //blobServiceClient = new BlobServiceClient(environment.blobContainerSasUrl);
 
+  prepaid: number | undefined = 0;
+
   authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);;
 
   fileName: string = '';
@@ -66,7 +68,7 @@ export class InvoiceComponent implements OnInit{
     (accumulator, row) => accumulator + (row.price*row.quantity),
     0
   );
-  topay: number = this.sum - this.discount;
+  topay: number = this.sum - this.discount - (this.prepaid ?? 0);
 
   columns = [
     {
@@ -189,7 +191,7 @@ export class InvoiceComponent implements OnInit{
           0
         );
 
-        this.topay = this.sum - this.discount;
+        this.topay = this.sum - this.discount - (this.prepaid ?? 0);
 
         this.table.renderRows();
       }
@@ -198,18 +200,21 @@ export class InvoiceComponent implements OnInit{
 
   editAction(i: number) {
     let action: any = { action: this.actions[i] };
+    let prepaid: any = {this.prepaid: this.prepaid };
     const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
       width: '75vw',
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
         ...action,
+        ...prepaid,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions[i] = result.action;
+        this.prepaid = result.prepaid;
       }
     });
   }
@@ -245,7 +250,7 @@ export class InvoiceComponent implements OnInit{
           0
         );
 
-        this.topay = this.sum - this.discount;
+        this.topay = this.sum - this.discount - (this.prepaid ?? 0);
 
         this.table.renderRows();
       }
@@ -253,18 +258,21 @@ export class InvoiceComponent implements OnInit{
   }
 
   addAction() {
+    let prepaid: any = {this.prepaid: this.prepaid };
     const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
       width: '75vw',
       enterAnimationDuration: '25ms',
       exitAnimationDuration: '25ms',
       data: {
         action: '',
+        ...prepaid,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.actions.push(result.action);
+        this.prepaid = result.prepaid;
       }
     });
   }
@@ -302,7 +310,7 @@ export class InvoiceComponent implements OnInit{
           0
         );
 
-        this.topay = this.sum - this.discount;
+        this.topay = this.sum - this.discount - (this.prepaid ?? 0);
       }
     });
   }
@@ -500,7 +508,9 @@ export class InvoiceComponent implements OnInit{
       0
     );
 
-    let topay = sum - discount;
+    let prepaidlocal = this.prepaid ?? 0;
+
+    let topay = sum - discount - prepaidlocal;
 
     result.push([
       { colSpan: 7, text: 'Сума:', style: 'tableHeader' },
@@ -531,6 +541,23 @@ export class InvoiceComponent implements OnInit{
         },
       ]);
       
+      if(prepaidlocal > 0){
+ 
+        result.push([
+          { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${prepaidlocal}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
+
       result.push([
         { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
         '',
