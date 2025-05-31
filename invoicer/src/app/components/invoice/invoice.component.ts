@@ -546,7 +546,7 @@ export class InvoiceComponent implements OnInit{
         },
       ]);
       
-      if(this.prepaid ?? 0){
+      if((this.prepaid ?? 0) > 0){
  
         result.push([
           { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
