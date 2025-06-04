@@ -377,17 +377,10 @@ export class InvoiceComponent implements OnInit{
               style: 'header',
             },
           ]
-        ]
+        ],
+				dontBreakRows: true,
       },
-      layout: {
-        hLineWidth: () => 0,
-        vLineWidth: () => 0,
-        paddingTop: () => 0,
-        paddingBottom: () => 0,
-        paddingLeft: () => 0,
-        paddingRight: () => 0,
-        dontBreakRows: true
-      },
+      layout: 'noBorders'
     });
 
     result.content.push({
