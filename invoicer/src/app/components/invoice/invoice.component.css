@@ -130,7 +130,7 @@ table {
 .contact-info img {
   width: 90px;
   height: 90px;
-  object-fit: cover;
+  object-fit: contain;
   margin-left: auto;
 }
 
