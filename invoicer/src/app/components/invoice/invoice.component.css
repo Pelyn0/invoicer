@@ -86,3 +86,29 @@ table {
     text-align: center;
   }
 }
+
+.responsive-table {
+  display: none;
+}
+
+.responsive-table .row {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.responsive-table .cell {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+  table#invoice-table {
+    display: none;
+  }
+
+  .responsive-table {
+    display: block;
+  }
+}

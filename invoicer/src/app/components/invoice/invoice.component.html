@@ -100,4 +100,26 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <div class="responsive-table">
+    <div class="row" *ngFor="let row of invoiceData; let i = index">
+      <div class="cell"><strong>Категорія:</strong> {{ row.category }}</div>
+      
+      <ng-container
+        *ngFor="let column of columns"
+        [matColumnDef]="column.columnDef"
+      >
+        <div class="cell"><strong>{{ column.header }}:</strong> {{ column.cell(row, i + 1) }}</div>
+      </ng-container>
+      
+      <div class="cell actions">
+        <button mat-icon-button (click)="edit(i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
