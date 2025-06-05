@@ -1,0 +1,14 @@
+<div class="timeline-container">
+  <div *ngFor="let item of timelineData" class="timeline-item">
+    <div class="timeline-dot"></div>
+    
+    <mat-expansion-panel class="timeline-card">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ item.title }}</mat-panel-title>
+        <mat-panel-description>{{ item.date | date:'mediumDate' }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <p>{{ item.description }}</p>
+    </mat-expansion-panel>
+  </div>
+</div>

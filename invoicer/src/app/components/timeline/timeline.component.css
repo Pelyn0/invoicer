@@ -1,0 +1,27 @@
+.timeline-container {
+  position: relative;
+  margin-left: 40px;
+  padding-left: 10px;
+  border-left: 3px solid #ccc;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  background-color: #3f51b5;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-card {
+  margin-left: 20px;
+  width: calc(100% - 40px);
+}

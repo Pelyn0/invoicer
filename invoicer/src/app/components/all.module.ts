@@ -15,12 +15,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SavedInvoicesDialogComponent } from './saved-invoices/saved-invoices.component';
 import { InvoiceActionDialogComponent } from './invoice-action-dialog/invoice-action-dialog.component';
 import { PlanComponent } from './plan/plan.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { TimelineComponent } from './timeline/timeline.component';
 
 @NgModule({
   exports: [
     InvoiceComponent,
     PlanComponent,
+    TimelineComponent,
     InvoiceItemDialogComponent,
     InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
@@ -29,6 +31,7 @@ import { PlanComponent } from './plan/plan.component';
   declarations: [
     InvoiceComponent,
     PlanComponent,
+    TimelineComponent,
     InvoiceItemDialogComponent,
     InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
@@ -45,6 +48,7 @@ import { PlanComponent } from './plan/plan.component';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatExpansionModule,
   ],
 })
 export class AllModule {}
