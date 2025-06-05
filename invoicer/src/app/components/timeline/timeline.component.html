@@ -1,16 +1,16 @@
-<div class="timeline-wrapper">
-  <div *ngFor="let item of timelineData; let i = index" class="timeline-entry">
-    
-    <div *ngIf="showDateLabel(i)" class="date-label">
+<div class="timeline-container">
+  <div *ngFor="let item of timelineData; let i = index" class="timeline-item">
+    <div *ngIf="showDateLabel(i)" class="timeline-date-label">
       {{ item.date | date: 'dd MMMM yyyy' }}
     </div>
 
-    <div class="timeline-row" [ngClass]="{ 'left': i % 2 === 0, 'right': i % 2 !== 0 }">
-      <div class="card-container">
+    <div class="timeline-grid">
+      <!-- Left side -->
+      <div class="timeline-card" *ngIf="i % 2 === 0">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <div class="card-content">
-              <div class="date-block" *ngIf="i % 2 === 0">
+              <div class="date-block">
                 <div>{{ item.date | date: 'MMM' }}</div>
                 <div class="day">{{ item.date | date: 'dd' }}</div>
                 <div>{{ item.date | date: 'yyyy' }}</div>
@@ -19,7 +19,28 @@
                 <strong>{{ item.title }}</strong>
                 <div>{{ item.description }}</div>
               </div>
-              <div class="date-block" *ngIf="i % 2 !== 0">
+            </div>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
+
+      <!-- Center Line -->
+      <div class="timeline-center">
+        <div class="line"></div>
+        <div class="dot"></div>
+        <div class="time">{{ item.date | date: 'hh:mm a' }}</div>
+      </div>
+
+      <!-- Right side -->
+      <div class="timeline-card" *ngIf="i % 2 !== 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="card-content">
+              <div class="text-block">
+                <strong>{{ item.title }}</strong>
+                <div>{{ item.description }}</div>
+              </div>
+              <div class="date-block">
                 <div>{{ item.date | date: 'MMM' }}</div>
                 <div class="day">{{ item.date | date: 'dd' }}</div>
                 <div>{{ item.date | date: 'yyyy' }}</div>
@@ -27,12 +48,6 @@
             </div>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
-      </div>
-
-      <div class="timeline-line">
-        <div class="line"></div>
-        <div class="dot"></div>
-        <div class="time">{{ item.date | date: 'hh:mm a' }}</div>
       </div>
     </div>
   </div>
