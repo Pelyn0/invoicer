@@ -15,9 +15,14 @@ export class AppComponent implements OnInit {
   tool = 'invoicer';
 
   async ngOnInit() {
-    const savedKey = this.getCookie('access_key');
-    if (savedKey && await this.isKeyValid(savedKey)) {
+    let rights = await Auth();
+
+    if (rights != Rights.unknown) {
       this.accessGranted = true;
+    
+      if (rights == Rights.demoPlanner){
+        this.tool = 'planner';
+      }
     }
   }
 
