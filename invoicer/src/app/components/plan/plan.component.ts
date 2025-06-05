@@ -34,7 +34,7 @@ export class PlanComponent implements OnInit {
         {
             id: 2,
             timestamp: new Date(2025,5,6),
-            title: "Test2";
+            title: "Test2",
             description: "Test descr2",
         },
     ];
