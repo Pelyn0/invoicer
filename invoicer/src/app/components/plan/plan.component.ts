@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { NgxTimelineEvent } from "@frxjs/ngx-timeline";
 import { Rights } from "src/app/models/rights";
 import { Auth } from "src/app/services/auth";
 import { InvoiceContactsDialogComponent } from "../invoice-contacts-dialog/invoice-contacts-dialog.component";
@@ -25,7 +24,7 @@ export class PlanComponent implements OnInit {
 
     authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);
 
-    events: NgxTimelineEvent[] = [
+    events: any[] = [
         {
             id: 1,
             timestamp: new Date(2025,5,5),

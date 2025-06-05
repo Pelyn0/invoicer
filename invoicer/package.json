@@ -27,8 +27,7 @@
     "pdfmake": "^0.2.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0",
-    "@frxjs/ngx-timeline": "~2.1.0"
+    "zone.js": "~0.12.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "15.2.9",

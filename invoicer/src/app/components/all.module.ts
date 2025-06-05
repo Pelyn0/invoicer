@@ -10,7 +10,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { TimelineModule } from '@frxjs/ngx-timeline';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SavedInvoicesDialogComponent } from './saved-invoices/saved-invoices.component';
@@ -46,7 +45,6 @@ import { PlanComponent } from './plan/plan.component';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    TimelineModule,
   ],
 })
 export class AllModule {}
