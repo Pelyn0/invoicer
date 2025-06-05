@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environment';
+import { Auth } from './services/auth';
+import { Rights } from './models/rights';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'invoicer';
   accessGranted = false;
   accessKey = '';
+  tool = 'invoicer';
 
   async ngOnInit() {
     const savedKey = this.getCookie('access_key');
@@ -22,6 +25,11 @@ export class AppComponent implements OnInit {
     if (await this.isKeyValid(this.accessKey)) {
       this.setCookie('access_key', this.accessKey, 7);
       this.accessGranted = true;
+
+      let rights = await Auth();
+      if (rights == Rights.demoPlanner){
+        this.tool = 'planner';
+      }
     } else {
       alert('Помилка!');
     }

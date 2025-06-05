@@ -19,7 +19,13 @@
 </div>
 
 <div *ngIf="accessGranted">
-    <app-invoice></app-invoice>
+    <div *ngIf="tool == 'invoicer'">
+        <app-invoice></app-invoice>
+    </div>
+    <div *ngIf="tool == 'planner'">
+        <app-invoice></app-invoice>
+    </div>
+    
 </div>
 
 <router-outlet></router-outlet>
