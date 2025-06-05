@@ -1,14 +1,16 @@
-.timeline-container {
+.timeline-wrapper {
+  position: relative;
   padding: 40px 20px;
 }
 
-.timeline-item {
+.timeline-entry {
+  position: relative;
   margin-bottom: 60px;
 }
 
-.timeline-date-label {
+.date-label {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   background-color: orange;
   color: white;
   display: inline-block;
@@ -18,55 +20,64 @@
   font-size: 14px;
 }
 
-.timeline-grid {
-  display: grid;
-  grid-template-columns: 1fr 60px 1fr;
-  align-items: start;
+.timeline-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   position: relative;
 }
 
-.timeline-card {
-  mat-expansion-panel {
-    width: 100%;
-  }
+.timeline-row.left .card-container {
+  order: 1;
+}
+.timeline-row.left .timeline-line {
+  order: 2;
 }
 
-.timeline-center {
+.timeline-row.right .card-container {
+  order: 2;
+}
+.timeline-row.right .timeline-line {
+  order: 1;
+}
+
+.card-container {
+  width: 45%;
+}
+
+.timeline-line {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 10%;
   position: relative;
 }
 
-.timeline-center .line {
-  position: absolute;
+.timeline-line .line {
   width: 2px;
   height: 100%;
   background: #ccc;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
 }
 
-.timeline-center .dot {
+.timeline-line .dot {
   width: 12px;
   height: 12px;
   background: orange;
   border-radius: 50%;
-  margin: 6px 0;
+  margin: 4px 0;
 }
 
-.timeline-center .time {
+.timeline-line .time {
   font-size: 13px;
-  color: #666;
   margin-top: 4px;
+  color: #666;
 }
 
 .card-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .date-block {
