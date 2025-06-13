@@ -3,6 +3,10 @@
   padding: 40px 20px;
 }
 
+.expansion-panel-header-height {
+  height: auto;
+}
+
 .timeline-entry {
   position: relative;
   margin-bottom: 60px;
