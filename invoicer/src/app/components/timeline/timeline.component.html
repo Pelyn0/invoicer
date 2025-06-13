@@ -5,34 +5,33 @@
       {{ item.date | date: 'dd MMMM yyyy' }}
     </div>
 
-    <div class="timeline-row" [ngClass]="{ 'left': i % 2 === 0, 'right': i % 2 !== 0 }">
-      <div class="card-container">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <div class="card-content">
-              <div class="date-block" *ngIf="i % 2 === 0">
-                <div>{{ item.date | date: 'MMM' }}</div>
-                <div class="day">{{ item.date | date: 'dd' }}</div>
-                <div>{{ item.date | date: 'yyyy' }}</div>
-              </div>
-              <div class="text-block">
-                <strong>{{ item.title }}</strong>
-                <div>{{ item.description }}</div>
-              </div>
-              <div class="date-block" *ngIf="i % 2 !== 0">
-                <div>{{ item.date | date: 'MMM' }}</div>
-                <div class="day">{{ item.date | date: 'dd' }}</div>
-                <div>{{ item.date | date: 'yyyy' }}</div>
-              </div>
-            </div>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </div>
-
+    <div class="timeline-row">
       <div class="timeline-line">
         <div class="line"></div>
         <div class="dot"></div>
         <div class="time">{{ item.date | date: 'hh:mm a' }}</div>
+      </div>
+
+      <div class="card-container">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div class="card-content">
+            <mat-panel-title>
+              <div class="date-block">
+                <div>{{ item.date | date: 'MMM' }}</div>
+                <div class="day">{{ item.date | date: 'dd' }}</div>
+                <div>{{ item.date | date: 'yyyy' }}</div>
+              </div>
+            </mat-panel-title>
+              <mat-panel-description>
+                <div class="text-block">
+                  <strong>{{ item.title }}</strong>
+                </div>
+              </mat-panel-description>
+            </div>
+          </mat-expansion-panel-header>
+          <div>{{ item.description }}</div>
+        </mat-expansion-panel>
       </div>
     </div>
   </div>

@@ -27,20 +27,6 @@
   position: relative;
 }
 
-.timeline-row.left .card-container {
-  order: 1;
-}
-.timeline-row.left .timeline-line {
-  order: 2;
-}
-
-.timeline-row.right .card-container {
-  order: 2;
-}
-.timeline-row.right .timeline-line {
-  order: 1;
-}
-
 .card-container {
   width: 45%;
 }
