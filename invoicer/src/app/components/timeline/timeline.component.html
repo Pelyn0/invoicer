@@ -2,25 +2,17 @@
   <div *ngFor="let item of timelineData; let i = index" class="timeline-entry">
     
     <div *ngIf="showDateLabel(i)" class="date-label">
-      {{ item.date | date: 'dd MMMM yyyy' }}
+      {{ item.date | date: 'dd/MM/yyyy' }}
     </div>
 
     <div class="timeline-row">
-      <div class="timeline-line">
-        <div class="line"></div>
-        <div class="dot"></div>
-        <div class="time">{{ item.date | date: 'hh:mm a' }}</div>
-      </div>
-
       <div class="card-container">
         <mat-expansion-panel>
           <mat-expansion-panel-header class="expansion-panel-header-height">
             <div class="card-content">
             <mat-panel-title>
               <div class="date-block">
-                <div>{{ item.date | date: 'MMM' }}</div>
-                <div class="day">{{ item.date | date: 'dd' }}</div>
-                <div>{{ item.date | date: 'yyyy' }}</div>
+                <div class="day">{{ item.date | date: 'HH:mm' }}</div>
               </div>
             </mat-panel-title>
               <mat-panel-description>
