@@ -19,4 +19,29 @@
 
 <mat-divider></mat-divider>
 
+<div class="full-width-block">
+  <div class="contact-info">
+    <img [src]="contactImage" alt="Contact" />
+    <div class="contact-text">
+      <p *ngFor="let contact of contacts">
+        {{ contact.toString() }}
+      </p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <p *ngFor="let action of actions; let i = index">
+      —&nbsp; {{ action.toString() }}
+      <button mat-flat-button (click)="editAction(i)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-flat-button (click)="deleteAction(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </p>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
 <app-timeline></app-timeline>
