@@ -6,7 +6,7 @@
         <mat-label>Дія</mat-label>
         <input matInput [(ngModel)]="data.action" name="action" />
       </mat-form-field>
-      <mat-form-field class="invoice-action-full-width">
+      <mat-form-field  *ngIf="tool != 'planner'" class="invoice-action-full-width">
         <mat-label>Завдаток</mat-label>
         <input matInput type="number" min="0" [(ngModel)]="data.prepaid" name="prepaid" />
       </mat-form-field>
