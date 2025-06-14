@@ -65,6 +65,27 @@ export class PlanComponent implements OnInit {
       });
     }
 
+    editAction(i: number) {
+      let action: any = { action: this.actions[i] };
+      const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
+        width: '75vw',
+        enterAnimationDuration: '25ms',
+        exitAnimationDuration: '25ms',
+        data: {
+          ...action,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.actions[i] = result.action;
+        }
+      });
+    }
+
+    deleteAction(i: number) {
+      this.actions.splice(i, 1);
+    }
     
     addAction() {
         const dialogRef = this.dialog.open(InvoiceActionDialogComponent, {
