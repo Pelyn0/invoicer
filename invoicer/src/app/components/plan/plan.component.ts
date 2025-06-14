@@ -50,7 +50,7 @@ export class PlanComponent implements OnInit {
             description: 'This is the description of the event 4',
             date: new Date('2025-07-05T19:24:00')
         }
-    ];
+    ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
     constructor(public dialog: MatDialog) {}
 
