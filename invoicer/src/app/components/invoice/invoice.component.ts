@@ -325,7 +325,7 @@ export class InvoiceComponent implements OnInit{
   async generateInvoice() {
     const pdfMake = require('pdfmake/build/pdfmake');
     const pdfFonts = require('pdfmake/build/vfs_fonts');
-    (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+    (<any>pdfMake).vfs = pdfFonts.vfs;
 
     pdfMake
       .createPdf(this.getDocDefinition())
