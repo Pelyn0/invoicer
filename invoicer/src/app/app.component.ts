@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   tool = 'invoicer';
   
   constructor(private titleService: Title) {
-    this.titleService.setTitle('Invoicer');
   }
 
   async ngOnInit() {
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
       this.accessGranted = true;
 
       this.titleService.setTitle('Invoicer');
-      
+
       let rights = await Auth();
       if (rights == Rights.demoPlanner){
         this.tool = 'planner';
