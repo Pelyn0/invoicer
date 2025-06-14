@@ -57,3 +57,35 @@
     width: 100%;
   }
 }
+
+.full-width-block {
+  width: 100%;
+  padding: 10px 5%;
+  box-sizing: border-box;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.contact-info img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-left: auto;
+}
+
+.contact-text {
+  text-align: right;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.actions {
+  margin-top: 10px;
+  width: 100%;
+}
