@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environment';
 import { Auth } from './services/auth';
 import { Rights } from './models/rights';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,24 @@ export class AppComponent implements OnInit {
   accessGranted = false;
   accessKey = '';
   tool = 'invoicer';
+  
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Invoicer');
+  }
 
   async ngOnInit() {
     let rights = await Auth();
 
     if (rights != Rights.unknown) {
       this.accessGranted = true;
-    
+      
       if (rights == Rights.demoPlanner){
         this.tool = 'planner';
+        
+        this.titleService.setTitle('Planner');
       }
+
+      this.titleService.setTitle('Invoicer');
     }
   }
 
