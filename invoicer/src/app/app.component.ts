@@ -40,9 +40,12 @@ export class AppComponent implements OnInit {
       this.setCookie('access_key', this.accessKey, 7);
       this.accessGranted = true;
 
+      this.titleService.setTitle('Invoicer');
+      
       let rights = await Auth();
       if (rights == Rights.demoPlanner){
         this.tool = 'planner';
+        this.titleService.setTitle('Planner');
       }
     } else {
       alert('Помилка!');
