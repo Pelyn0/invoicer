@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BlobServiceClient } from '@azure/storage-blob';
+import { Rights } from 'src/app/models/rights';
+import { Auth } from 'src/app/services/auth';
 import { environment } from 'src/environment';
 
 @Component({
@@ -12,10 +14,17 @@ export class SavedInvoicesDialogComponent implements OnInit {
   //blobServiceClient = new BlobServiceClient(environment.blobSasUrl);
   files: string[] = [];
 
+  tool = 'invoicer';
+
   constructor(public dialogRef: MatDialogRef<SavedInvoicesDialogComponent>) {}
 
   async ngOnInit() {
     await this.getList();
+    
+    let rights = await Auth();
+    if (rights == Rights.demoPlanner){
+      this.tool = 'planner';
+    }
   }
 
   async getList() {

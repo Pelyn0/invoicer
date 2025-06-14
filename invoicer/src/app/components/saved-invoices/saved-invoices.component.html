@@ -7,7 +7,8 @@
       </button>
     </li>
   </ul>
-  <input type="file" (change)="onFileSelected($event)" accept=".invoicer">
+  <input *ngIf="tool == 'planner'" type="file" (change)="onFileSelected($event)" accept=".planner">
+  <input *ngIf="tool != 'planner'" type="file" (change)="onFileSelected($event)" accept=".invoicer">
 </div>
 <div mat-dialog-actions class="actions">
   <button mat-button (click)="onNoClick()">Revert</button>
