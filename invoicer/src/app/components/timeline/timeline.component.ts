@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: 'app-timeline',
@@ -7,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 
 export class TimelineComponent implements OnInit {
-    timelineData = [
+    @Input() timelineData: any[] = [
         {
             title: 'Title 0',
             description: 'This is the description of the event 0',
@@ -34,7 +34,7 @@ export class TimelineComponent implements OnInit {
             date: new Date('2025-07-05T19:24:00')
         }
     ];
-
+    
     ngOnInit(): void {
     }
 

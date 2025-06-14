@@ -24,19 +24,32 @@ export class PlanComponent implements OnInit {
 
     authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);
 
-    events: any[] = [
+    events = [
         {
-            id: 1,
-            timestamp: new Date(2025,5,5),
-            title: "Test",
-            description: "Test descr",
+            title: 'Title 0',
+            description: 'This is the description of the event 0',
+            date: new Date('2025-06-05T19:24:00')
         },
         {
-            id: 2,
-            timestamp: new Date(2025,5,6),
-            title: "Test2",
-            description: "Test descr2",
+            title: 'Title 2',
+            description: 'This is the description of the event 2',
+            date: new Date('2025-06-05T19:24:00')
         },
+        {
+            title: 'Title 1',
+            description: 'This is the description of the event 1',
+            date: new Date('2025-06-06T19:24:00')
+        },
+        {
+            title: 'Title 3',
+            description: 'This is the description of the event 3',
+            date: new Date('2025-06-06T19:24:00')
+        },
+        {
+            title: 'Title 6',
+            description: 'This is the description of the event 4',
+            date: new Date('2025-07-05T19:24:00')
+        }
     ];
 
     constructor(public dialog: MatDialog) {}
