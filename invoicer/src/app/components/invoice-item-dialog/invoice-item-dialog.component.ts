@@ -811,7 +811,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       "quantity": 1,
       "price": 250,
       "discount": 0,
-      "category": "Сценічне обладнання"
+      "category": "Сценічні конструкції"
     },
     {
       "value": "79",
@@ -820,7 +820,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       "quantity": 1,
       "price": 700,
       "discount": 0,
-      "category": "Сценічне обладнання"
+      "category": "Сценічні конструкції"
     },
     {
       "value": "80",
@@ -829,7 +829,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       "quantity": 1,
       "price": 50,
       "discount": 0,
-      "category": "Сценічне обладнання"
+      "category": "Сценічні конструкції"
     },
     {
       "value": "81",
@@ -838,7 +838,7 @@ export class InvoiceItemDialogComponent implements OnInit {
       "quantity": 1,
       "price": 30,
       "discount": 0,
-      "category": "Сценічне обладнання"
+      "category": "Сценічні конструкції"
     },
     {
       "value": "82",
