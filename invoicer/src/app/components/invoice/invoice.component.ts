@@ -41,7 +41,8 @@ export class InvoiceComponent implements OnInit{
       quantity: 2,
       price: 10,
       discount: 0,
-      category: 'Світло'
+      category: 'Світло',
+      oncost: 0,
     },
     {
       title: 'Продукт 2',
@@ -49,7 +50,8 @@ export class InvoiceComponent implements OnInit{
       quantity: 1,
       price: 20,
       discount: 0,
-      category: 'Світло'
+      category: 'Світло',
+      oncost: 0,
     },
     {
       title: 'Продукт 3',
@@ -57,7 +59,8 @@ export class InvoiceComponent implements OnInit{
       quantity: 3,
       price: 5,
       discount: 0,
-      category: 'Світло'
+      category: 'Світло',
+      oncost: 0,
     },
   ];
   discount: number = this.invoiceData.reduce(
