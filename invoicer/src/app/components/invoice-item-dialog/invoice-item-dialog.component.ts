@@ -32,6 +32,7 @@ export class InvoiceItemDialogComponent implements OnInit {
     }
     
     this.data.discountPercents = ((Number(this.data.discount) || 0) / (this.data.quantity*this.data.price)) * 100;
+    this.data.oncostPercents = ((Number(this.data.oncost) || 0) / (this.data.quantity*this.data.price)) * 100;
     this.filteredCategories = [
       ...new Set(
         this.cars
@@ -69,6 +70,10 @@ export class InvoiceItemDialogComponent implements OnInit {
   
   onDiscountPercentsChanged(newValue: number) {
     this.data.discount = this.data.quantity*(this.data.price * ((Number(newValue) || 0)/100)); 
+  }
+
+  onOncostPercentsChanged(newValue: number) {
+    this.data.oncost = this.data.quantity*(this.data.price * ((Number(newValue) || 0)/100)); 
   }
 
   filteredItems() {

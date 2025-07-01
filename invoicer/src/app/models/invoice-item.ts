@@ -8,4 +8,6 @@ export interface InvoiceItem {
   value?: string;
   category?: string;
   discountPercents?: number;
+  oncost?: number;
+  oncostPercents?: number;
 }

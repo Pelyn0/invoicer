@@ -95,6 +95,28 @@
           readonly
         />
       </mat-form-field>
+      
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Витрати в відсотках</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [ngModel]="data.oncostPercents"
+          name="oncostPercents"
+          (ngModelChange)="onOncostPercentsChanged($event)"
+        />
+      </mat-form-field>
+      <mat-form-field class="invoice-item-full-width">
+        <mat-label>Витрати</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="data.oncost"
+          name="oncost"
+        />
+      </mat-form-field>
     </div>
   </form>
 </div>

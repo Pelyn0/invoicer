@@ -69,6 +69,12 @@ export class InvoiceComponent implements OnInit{
     0
   );
   topay: number = this.sum - this.discount - (this.prepaid ?? 0);
+  oncost: number = this.invoiceData.reduce(
+    (accumulator, row) => accumulator + (Number(row.oncost) || 0),
+    0
+  );
+
+  netProfit: number = this.sum - this.discount - this.oncost;
 
   columns = [
     {
@@ -110,6 +116,11 @@ export class InvoiceComponent implements OnInit{
       columnDef: 'topay',
       header: 'До оплати, грн',
       cell: (element: InvoiceItem) => `${(element.price * element.quantity) - (Number(element.discount) || 0)}`,
+    },
+    {
+      columnDef: 'oncost',
+      header: 'Витрати, грн',
+      cell: (element: InvoiceItem) => `${element.oncost}`,
     },
   ];
   displayedColumns = this.columns.map((c) => c.columnDef).concat('category').concat('action');
@@ -192,6 +203,13 @@ export class InvoiceComponent implements OnInit{
         );
 
         this.topay = this.sum - this.discount - (this.prepaid ?? 0);
+        
+        this.oncost = this.invoiceData.reduce(
+          (accumulator, row) => {accumulator = accumulator + (Number(row.oncost) || 0); return accumulator},
+          0
+        );
+
+        this.netProfit = this.sum - this.discount - this.oncost;
 
         this.table.renderRows();
       }
@@ -233,6 +251,7 @@ export class InvoiceComponent implements OnInit{
         quantity: 1,
         selectedCar: '-1',
         discount: '0',
+        oncost: '0',
       },
     });
 
@@ -253,6 +272,13 @@ export class InvoiceComponent implements OnInit{
         );
 
         this.topay = this.sum - this.discount - (this.prepaid ?? 0);
+
+        this.oncost = this.invoiceData.reduce(
+          (accumulator, row) => {accumulator = accumulator + (Number(row.oncost) || 0); return accumulator},
+          0
+        );
+
+        this.netProfit = this.sum - this.discount - this.oncost;
 
         this.table.renderRows();
       }
@@ -308,7 +334,7 @@ export class InvoiceComponent implements OnInit{
         this.actions = invoice.actions as string[];
         this.fileName = result.fileName;
         this.discount = this.invoiceData.reduce(
-          (accumulator, row) => {accumulator = accumulator + (Number(row.discount) || 0); console.log(accumulator); return accumulator},
+          (accumulator, row) => {accumulator = accumulator + (Number(row.discount) || 0); return accumulator},
           0
         );
 
@@ -318,6 +344,12 @@ export class InvoiceComponent implements OnInit{
         );
 
         this.topay = this.sum - this.discount - (this.prepaid ?? 0);
+        this.oncost = this.invoiceData.reduce(
+          (accumulator, row) => {accumulator = accumulator + (Number(row.oncost) || 0); return accumulator},
+          0
+        );
+
+        this.netProfit = this.sum - this.discount - (Number(this.oncost) || 0);
       }
     });
   }
