@@ -120,13 +120,8 @@ export class InvoiceComponent implements OnInit{
       header: 'До оплати, грн',
       cell: (element: InvoiceItem) => `${(element.price * element.quantity) - (Number(element.discount) || 0)}`,
     },
-    {
-      columnDef: 'oncost',
-      header: 'Витрати, грн',
-      cell: (element: InvoiceItem) => `${element.oncost}`,
-    },
   ];
-  displayedColumns = this.columns.map((c) => c.columnDef).concat('category').concat('action');
+  displayedColumns = this.columns.map((c) => c.columnDef).concat('oncost').concat('category').concat('action');
 
   @ViewChild(MatTable) table!: MatTable<InvoiceItem>;
 
