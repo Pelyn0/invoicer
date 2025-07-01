@@ -68,6 +68,15 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="oncost">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="mr">Витрати, грн</div>
+      </th>
+      <td mat-cell *matCellDef="let row; let i = index">
+        {{ row.oncost }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef class="right-align">
         <div class="mr">Категорія</div>
