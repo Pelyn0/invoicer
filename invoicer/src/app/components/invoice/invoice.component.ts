@@ -428,12 +428,24 @@ export class InvoiceComponent implements OnInit{
       margin: [0, 0, 0, 25],
     });
 
-    result.content.push({
-      table: {
-        widths: ['auto', '*', '*', 'auto', 'auto', 'auto','auto','auto'],
-        body: this.getTableBodyForPdf(operational),
-      },
-    } as any);
+    if(operational){
+
+      result.content.push({
+        table: {
+          widths: ['auto', '*', '*', 'auto', 'auto', 'auto','auto','auto','auto','auto'],
+          body: this.getTableBodyForPdf(operational),
+        },
+      } as any);
+    }
+    else{
+
+      result.content.push({
+        table: {
+          widths: ['auto', '*', '*', 'auto', 'auto', 'auto','auto','auto'],
+          body: this.getTableBodyForPdf(),
+        },
+      } as any);
+    }
 
     result.styles = {
       header: {
