@@ -25,6 +25,7 @@ export class InvoiceComponent implements OnInit{
   authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);;
 
   fileName: string = '';
+  downloadOperational: boolean = false;
   actions: string[] = ['Дія 1', 'Дія 2', 'Дія 3'];
 
   contacts: string[] = 
@@ -361,9 +362,12 @@ export class InvoiceComponent implements OnInit{
       .createPdf(this.getDocDefinition())
       .download(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
-    pdfMake
+    if(this.downloadOperational){
+
+      pdfMake
       .createPdf(this.getDocDefinition(true))
       .download(`${this.fileName ? this.fileName : 'Receipt'}_profit.pdf`);
+    }
 
     const jsonData = JSON.stringify(this.getInvoice()); // Convert the object to JSON string
     const blob = new Blob([jsonData], { type: 'application/json' }); // Create a Blob from the JSON data
@@ -467,8 +471,8 @@ export class InvoiceComponent implements OnInit{
     );
 
     if(operational) {
-      headers.push({ text: 'oncost', style: 'tableHeader' } as any);
-      headers.push({ text: 'netprofit', style: 'tableHeader' } as any);
+      headers.push({ text: 'Витрати, грн', style: 'tableHeader' } as any);
+      headers.push({ text: 'Чистий дохід, грн', style: 'tableHeader' } as any);
     }
 
     result.push(headers);
