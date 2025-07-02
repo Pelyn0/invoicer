@@ -41,7 +41,7 @@ export class InvoiceComponent implements OnInit{
       quantity: 2,
       price: 10,
       discount: 0,
-      category: 'Світло',
+      category: 'Звук',
       oncost: 0,
     },
     {
@@ -49,7 +49,7 @@ export class InvoiceComponent implements OnInit{
       manufacturer: 'Виробник 2',
       quantity: 1,
       price: 20,
-      discount: 0,
+      discount: 5,
       category: 'Світло',
       oncost: 0,
     },
@@ -60,7 +60,7 @@ export class InvoiceComponent implements OnInit{
       price: 5,
       discount: 0,
       category: 'Світло',
-      oncost: 0,
+      oncost: 3,
     },
   ];
   discount: number = this.invoiceData.reduce(
@@ -361,6 +361,10 @@ export class InvoiceComponent implements OnInit{
       .createPdf(this.getDocDefinition())
       .download(`${this.fileName ? this.fileName : 'Receipt'}.pdf`);
 
+    pdfMake
+      .createPdf(this.getDocDefinition(true))
+      .download(`${this.fileName ? this.fileName : 'Receipt'}_profit.pdf`);
+
     const jsonData = JSON.stringify(this.getInvoice()); // Convert the object to JSON string
     const blob = new Blob([jsonData], { type: 'application/json' }); // Create a Blob from the JSON data
     const url = window.URL.createObjectURL(blob); // Create an object URL for the Blob
@@ -379,7 +383,7 @@ export class InvoiceComponent implements OnInit{
     //await blockBlobClient.upload(content, content.length);
   }
 
-  getDocDefinition(): any {
+  getDocDefinition(operational: boolean = false): any {
     let result = 
     { 
       content: [] as any[],
@@ -427,7 +431,7 @@ export class InvoiceComponent implements OnInit{
     result.content.push({
       table: {
         widths: ['auto', '*', '*', 'auto', 'auto', 'auto','auto','auto'],
-        body: this.getTableBodyForPdf(),
+        body: this.getTableBodyForPdf(operational),
       },
     } as any);
 
@@ -443,12 +447,18 @@ export class InvoiceComponent implements OnInit{
     return result;
   }
 
-  getTableBodyForPdf(): any[][] {
+  getTableBodyForPdf(operational: boolean = false): any[][] {
     let result: any[][] = [];
 
     let headers = this.columns.map(
       (c) => ({ text: c.header, style: 'tableHeader' } as any)
     );
+
+    if(operational) {
+      headers.push({ text: 'oncost', style: 'tableHeader' } as any);
+      headers.push({ text: 'netprofit', style: 'tableHeader' } as any);
+    }
+
     result.push(headers);
 
     let groupedData = this.invoiceData.reduce((acc, item) => {
@@ -478,20 +488,51 @@ export class InvoiceComponent implements OnInit{
     groupedData.forEach((row, ix) =>{
       if(row.category){
 
-        result.push([
-          { colSpan: 8, text: row.category, style: 'tableHeader' },
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-        ]);
+        if(operational){
+
+          result.push([
+            { colSpan: 10, text: row.category, style: 'tableHeader' },
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+          ]);
+        }
+        else{
+
+          result.push([
+            { colSpan: 8, text: row.category, style: 'tableHeader' },
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+          ]);
+        }
       }
 
       row.items.forEach((row, i) =>
-        result.push([
+        operational
+        ? result.push([
+          `${i + 1}`,
+          row.title,
+          row.manufacturer,
+          `${row.quantity}`,
+          `${row.price}`,
+          `${row.price * row.quantity}`,
+          `${row.discount}`,
+          `${(row.price * row.quantity) - (Number(row.discount) || 0)}`,
+          `${row.oncost}`,
+          `${(row.price * row.quantity) - (Number(row.discount) || 0) - (Number(row.oncost) || 0)}`
+        ])
+        : result.push([
           `${i + 1}`,
           row.title,
           row.manufacturer,
@@ -514,26 +555,66 @@ export class InvoiceComponent implements OnInit{
       );
 
       let topayCategory = sumCategory - discountCategory;
+      
+      if(operational){
 
-      result.push([
-        { colSpan: 5, text: 'Всього:'},
-        '',
-        '',
-        '',
-        '',
-        {
-          text: `${sumCategory}`,
-          style: 'tableHeader',
-        },
-        {
-          text: `${discountCategory}`,
-          style: 'tableHeader',
-        },
-        {
-          text: `${topayCategory}`,
-          style: 'tableHeader',
-        },
-      ]);
+        let oncostCategory = row.items.reduce(
+          (accumulator, row) => accumulator + (Number(row.oncost) || 0),
+          0
+        );
+        
+        let netProfitCategory = topayCategory - oncostCategory;
+        
+        result.push([
+          { colSpan: 5, text: 'Всього:'},
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${sumCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${discountCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${topayCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${oncostCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${netProfitCategory}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
+      else{
+      
+        result.push([
+          { colSpan: 5, text: 'Всього:'},
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${sumCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${discountCategory}`,
+            style: 'tableHeader',
+          },
+          {
+            text: `${topayCategory}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
     });
 
     let sum = this.invoiceData.reduce(
@@ -547,9 +628,16 @@ export class InvoiceComponent implements OnInit{
     );
 
     let topay = sum - discount - (this.prepaid ?? 0);
+    
+    let oncost = this.invoiceData.reduce(
+      (accumulator, row) => accumulator + (Number(row.oncost) || 0),
+      0
+    );
+    
+    let netProfit = sum - discount - oncost;
 
     result.push([
-      { colSpan: 7, text: 'Сума:', style: 'tableHeader' },
+      { colSpan: operational ? 9 : 7, text: 'Сума:', style: 'tableHeader' },
       '',
       '',
       '',
@@ -564,7 +652,7 @@ export class InvoiceComponent implements OnInit{
 
     if(discount > 0){
       result.push([
-        { colSpan:7, text: 'Знижка:', style: 'tableHeader' },
+        { colSpan: operational ? 9 : 7, text: 'Знижка:', style: 'tableHeader' },
         '',
         '',
         '',
@@ -581,7 +669,7 @@ export class InvoiceComponent implements OnInit{
     if((this.prepaid ?? 0) > 0){
  
       result.push([
-        { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
+        { colSpan: operational ? 9 : 7, text: 'Завдаток:', style: 'tableHeader' },
         '',
         '',
         '',
@@ -596,7 +684,7 @@ export class InvoiceComponent implements OnInit{
     }
 
     result.push([
-      { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
+      { colSpan: operational ? 9 : 7, text: 'До оплати:', style: 'tableHeader' },
       '',
       '',
       '',
@@ -608,6 +696,23 @@ export class InvoiceComponent implements OnInit{
         style: 'tableHeader',
       },
     ]);
+      
+    if(operational && (this.oncost ?? 0) > 0){
+      
+      result.push([
+        { colSpan: 9, text: 'Чистий дохід:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${this.netProfit}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
 
     return result;
   }
