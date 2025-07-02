@@ -636,19 +636,40 @@ export class InvoiceComponent implements OnInit{
     
     let netProfit = sum - discount - oncost;
 
-    result.push([
-      { colSpan: operational ? 9 : 7, text: 'Сума:', style: 'tableHeader' },
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      {
-        text: `${sum}`,
-        style: 'tableHeader',
-      },
-    ]);
+    if(operational){
+
+      result.push([
+        { colSpan: 9, text: 'Сума:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${sum}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
+    else{
+
+      result.push([
+        { colSpan: 7, text: 'Сума:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${sum}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
 
     if(discount > 0){
       if(operational){
