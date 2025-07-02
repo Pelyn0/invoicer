@@ -8,10 +8,9 @@
       <mat-label>Назва файлу</mat-label>
       <input matInput [(ngModel)]="fileName" name="title" />
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Операційний файл</mat-label>
-      <input matInput type="checkbox" [(ngModel)]="downloadOperational" name="downloadOperational" />
-    </mat-form-field>
+    <mat-checkbox [(ngModel)]="downloadOperational" name="downloadOperational">
+      Операційний файл
+    </mat-checkbox>
     <button
       mat-raised-button
       (click)="generateInvoice()"
