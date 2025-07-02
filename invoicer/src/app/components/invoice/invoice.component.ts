@@ -478,7 +478,7 @@ export class InvoiceComponent implements OnInit{
 
     // Now move the specific category to the end
     const categoryToMove = 'Робота персоналу'; // <- change this to the category you want
-    const index = groupedData.findIndex(group => group.category === categoryToMove);
+    const index = groupedData.findIndex(group => group.category === categoryToMove || group.category === 'Працівники/додаткова робота');
 
     if (index !== -1) {
       const [itemToMove] = groupedData.splice(index, 1); // remove it
@@ -651,25 +651,85 @@ export class InvoiceComponent implements OnInit{
     ]);
 
     if(discount > 0){
-      result.push([
-        { colSpan: operational ? 9 : 7, text: 'Знижка:', style: 'tableHeader' },
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        {
-          text: `${discount}`,
-          style: 'tableHeader',
-        },
-      ]);
+      if(operational){
+
+        result.push([
+          { colSpan: 9, text: 'Знижка:', style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${discount}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
+      else{
+
+        result.push([
+          { colSpan: 7, text: 'Знижка:', style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${discount}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
     }
       
     if((this.prepaid ?? 0) > 0){
- 
+      if(operational){
+
+        result.push([
+          { colSpan: 9, text: 'Завдаток:', style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${this.prepaid}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
+      else{
+
+        result.push([
+          { colSpan: 7, text: 'Завдаток:', style: 'tableHeader' },
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
+          {
+            text: `${this.prepaid}`,
+            style: 'tableHeader',
+          },
+        ]);
+      }
+    }
+
+    if(operational){
+
       result.push([
-        { colSpan: operational ? 9 : 7, text: 'Завдаток:', style: 'tableHeader' },
+        { colSpan: 9, text: 'До оплати:', style: 'tableHeader' },
+        '',
+        '',
         '',
         '',
         '',
@@ -677,30 +737,50 @@ export class InvoiceComponent implements OnInit{
         '',
         '',
         {
-          text: `${this.prepaid}`,
+          text: `${topay}`,
           style: 'tableHeader',
         },
       ]);
     }
-
-    result.push([
-      { colSpan: operational ? 9 : 7, text: 'До оплати:', style: 'tableHeader' },
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      {
-        text: `${topay}`,
-        style: 'tableHeader',
-      },
-    ]);
+    else{
+      
+      result.push([
+        { colSpan: 7, text: 'До оплати:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${topay}`,
+          style: 'tableHeader',
+        },
+      ]);
+    }
       
     if(operational && (this.oncost ?? 0) > 0){
       
       result.push([
+        { colSpan: 9, text: 'Витрати:', style: 'tableHeader' },
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        {
+          text: `${this.oncost}`,
+          style: 'tableHeader',
+        },
+      ]);
+
+      result.push([
         { colSpan: 9, text: 'Чистий дохід:', style: 'tableHeader' },
+        '',
+        '',
         '',
         '',
         '',
