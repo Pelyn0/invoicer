@@ -288,6 +288,15 @@ export class InvoiceItemDialogComponent implements OnInit {
       "category": "Ефекти"
     },
     {
+      "value": "91",
+      "title": "Бенгальські вогні 70 см",
+      "manufacturer": "MAXSEM",
+      "quantity": 1,
+      "discount": 0,
+      "price": 30,
+      "category": "Ефекти"
+    },
+    {
       "value": "21",
       "title": "Комплект дистанційних запалів",
       "manufacturer": "8 блоків запалу",
@@ -871,6 +880,60 @@ export class InvoiceItemDialogComponent implements OnInit {
       "discount": 0,
       "price": 1000,
       "category": "Звук"
+    },
+    {
+      "value": "85",
+      "title": "Важкий дим (на перший весільний танець)",
+      "manufacturer": "DJ Power X-1",
+      "quantity": 1,
+      "discount": 0,
+      "price": 3000,
+      "category": "Послуги"
+    },
+    {
+      "value": "86",
+      "title": "Важкий дим (на вечірню церемонію)",
+      "manufacturer": "DJ Power X-1",
+      "quantity": 1,
+      "discount": 0,
+      "price": 3000,
+      "category": "Послуги"
+    },
+    {
+      "value": "87",
+      "title": "Звукооператор",
+      "manufacturer": "Налаштування, контроль та управління звуком",
+      "quantity": 1,
+      "discount": 0,
+      "price": 3000,
+      "category": "Працівники/додаткова робота"
+    },
+    {
+      "value": "88",
+      "title": "Світлооператор",
+      "manufacturer": "Монтаж, налаштування та управління світлом",
+      "quantity": 1,
+      "discount": 0,
+      "price": 3000,
+      "category": "Працівники/додаткова робота"
+    },
+    {
+      "value": "89",
+      "title": "Доставка обладнання",
+      "manufacturer": "транспортування техніки до місця проведення",
+      "quantity": 1,
+      "discount": 0,
+      "price": 1200,
+      "category": "Працівники/додаткова робота"
+    },
+    {
+      "value": "90",
+      "title": "Монтаж та демонтаж обладнання",
+      "manufacturer": "Установка та розбирання технічного обладнання",
+      "quantity": 1,
+      "discount": 0,
+      "price": 2000,
+      "category": "Працівники/додаткова робота"
     }
   ];
 
