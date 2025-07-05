@@ -40,6 +40,8 @@ export class TimelineComponent implements OnInit {
         }
     ];
 
+    categoryMap: { [key: string]: any[] } = {};
+
     timelineCategories: string[] = Array.from(
         new Set(this.timelineData.map(item => item.location))
     );
@@ -48,6 +50,11 @@ export class TimelineComponent implements OnInit {
         this.timelineCategories = Array.from(
             new Set(this.timelineData.map(item => item.location))
         );
+
+        this.categoryMap = this.timelineCategories.reduce((acc, cat) => {
+            acc[cat] = this.timelineData.filter(t => t.location === cat);
+            return acc;
+        }, {} as { [key: string]: any[] });
     }
 
     showDateLabel(index: number, data: any[]): boolean {

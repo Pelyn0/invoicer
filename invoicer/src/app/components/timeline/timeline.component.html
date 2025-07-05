@@ -1,8 +1,8 @@
 <div class="timeline-categories">
   <div *ngFor="let category of timelineCategories; let j = index" class="timeline-wrapper">
-    <div *ngFor=" let data = timelineData?.filter(t => t.location === category); let item of data; let i = index" class="timeline-entry">
+    <div *ngFor="let item of categoryMap[category]; let i = index" class="timeline-entry">
       
-      <div *ngIf="showDateLabel(i, data)" class="date-label">
+      <div *ngIf="showDateLabel(i, categoryMap[category])" class="date-label">
         {{ item.date | date: 'dd/MM/yyyy' }}
       </div>
 
