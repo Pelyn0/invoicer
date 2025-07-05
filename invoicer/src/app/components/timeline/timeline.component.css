@@ -1,10 +1,8 @@
 .timeline-categories {
-  position: relative;
   padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
 }
 
 .timeline-wrapper {
