@@ -42,9 +42,7 @@ export class TimelineComponent implements OnInit {
 
     categoryMap: { [key: string]: any[] } = {};
 
-    timelineCategories: string[] = Array.from(
-        new Set(this.timelineData.map(item => item.location))
-    );
+    timelineCategories: string[] = [];
 
     ngOnInit(): void {
         this.timelineCategories = Array.from(
