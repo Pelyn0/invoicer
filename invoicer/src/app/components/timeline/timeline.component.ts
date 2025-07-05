@@ -40,7 +40,7 @@ export class TimelineComponent implements OnInit {
         }
     ];
 
-    timelineCategories: string[] = this.timelineData.reduce(t=>location);
+    timelineCategories: string[] = this.timelineData.reduce(t=>t.location);
     
     ngOnInit(): void {
     }
