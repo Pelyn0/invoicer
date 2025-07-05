@@ -40,15 +40,20 @@ export class TimelineComponent implements OnInit {
         }
     ];
 
-    timelineCategories: string[] = this.timelineData.reduce(t=>t.location);
-    
+    timelineCategories: string[] = Array.from(
+        new Set(this.timelineData.map(item => item.location))
+    );
+
     ngOnInit(): void {
+        this.timelineCategories = Array.from(
+            new Set(this.timelineData.map(item => item.location))
+        );
     }
 
-    showDateLabel(index: number): boolean {
+    showDateLabel(index: number, data: any[]): boolean {
         if (index === 0) return true;
-        const prev = this.timelineData[index - 1].date.toDateString();
-        const current = this.timelineData[index].date.toDateString();
+        const prev = data[index - 1].date.toDateString();
+        const current = data[index].date.toDateString();
         return prev !== current;
     }
 }
