@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Rights } from "src/app/models/rights";
+import { PlanEvent } from "src/app/models/plan-event";
 import { Auth } from "src/app/services/auth";
 import { InvoiceContactsDialogComponent } from "../invoice-contacts-dialog/invoice-contacts-dialog.component";
 import { InvoiceActionDialogComponent } from "../invoice-action-dialog/invoice-action-dialog.component";
+import { PlanEventDialogComponent } from "../plan-event-dialog/plan-event-dialog.component";
 import { SavedInvoicesDialogComponent } from "../saved-invoices/saved-invoices.component";
 
 @Component({
@@ -55,7 +57,7 @@ export class PlanComponent implements OnInit {
             from: new Date('2025-07-05T19:24:00'),
             location: "Home"
         }
-    ].sort((a, b) => a.date.getTime() - b.date.getTime());
+    ].sort((a, b) => a.from.getTime() - b.from.getTime());
 
     constructor(public dialog: MatDialog) {}
 

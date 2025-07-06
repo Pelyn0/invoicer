@@ -53,7 +53,7 @@ export class PlanEventDialogComponent implements OnInit {
   onSelectedCategoryChanged(value: string) {
     this.filteredCategories = [
         ...new Set(
-          this.cars
+          this.events
             .map(c => c.category)
             .filter((cat): cat is string => typeof cat === 'string')
         )
@@ -83,7 +83,7 @@ export class PlanEventDialogComponent implements OnInit {
     {
         title: 'Title 2',
         description: 'This is the description of the event 2',
-        date: new Date('2025-06-05T19:24:00'),
+        from: new Date('2025-06-05T19:24:00'),
         location: "Rest",
         responsible: 'admin',
         category: 'test2',
@@ -91,15 +91,15 @@ export class PlanEventDialogComponent implements OnInit {
     {
         title: 'Title 1',
         description: 'This is the description of the event 1',
-        date: new Date('2025-06-06T19:24:00'),
-        location: "Rest"
+        from: new Date('2025-06-06T19:24:00'),
+        location: "Rest",
         responsible: 'admin',
         category: 'test2',
     },
     {
         title: 'Title 3',
         description: 'This is the description of the event 3',
-        date: new Date('2025-06-06T19:24:00'),
+        from: new Date('2025-06-06T19:24:00'),
         location: "Home",
         responsible: 'admin2',
         category: 'test2',
@@ -107,7 +107,7 @@ export class PlanEventDialogComponent implements OnInit {
     {
         title: 'Title 4',
         description: 'This is the description of the event 4',
-        date: new Date('2025-07-05T19:24:00'),
+        from: new Date('2025-07-05T19:24:00'),
         location: "Home",
         responsible: 'admin2',
         category: 'test',

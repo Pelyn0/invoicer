@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { PlanEvent } from "src/app/models/plan-event";
 
 @Component({
   selector: 'app-timeline',
@@ -62,8 +63,8 @@ export class TimelineComponent implements OnInit {
 
     showDateLabel(index: number, data: any[]): boolean {
         if (index === 0) return true;
-        const prev = data[index - 1].date.toDateString();
-        const current = data[index].date.toDateString();
+        const prev = data[index - 1].from.toDateString();
+        const current = data[index].from.toDateString();
         return prev !== current;
     }
 }

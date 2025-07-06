@@ -50,8 +50,8 @@
         <mat-label>Відповідальні</mat-label>
         <input matInput [(ngModel)]="data.responsible" name="responsible" />
       </mat-form-field>
+    </div>
   </form>
-</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onNoClick()">Відмінити</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Зберегти</button>
