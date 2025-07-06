@@ -52,7 +52,7 @@ export class TimelineComponent implements OnInit {
 
     ngOnInit(): void {
         this.timelineCategories = Array.from(
-            new Set(this.timelineData.map(item => item.location))
+            new Set(this.timelineData.map(item => item.location).filter((s): s is string => s !== undefined))
         );
 
         this.categoryMap = this.timelineCategories.reduce((acc, cat) => {
