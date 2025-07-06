@@ -57,7 +57,7 @@ export class PlanComponent implements OnInit {
             from: new Date('2025-07-05T19:24:00'),
             location: "Home"
         }
-    ].sort((a, b) => a.from.getTime() - b.from.getTime());
+    ].sort((a, b) => a.from!.getTime() - b.from!.getTime());
 
     constructor(public dialog: MatDialog) {}
 
