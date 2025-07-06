@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Додати/Редагувати подію</h1>
+<div mat-dialog-content>
+  <form class="plan-event-form">
+    <div class="flex-inputs">
+      
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Категорія</mat-label>
+        <input matInput [matAutocomplete]="auto" [(ngModel)]="data.category" name="category" (ngModelChange)="onSelectedCategoryChanged($event)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let cat of filteredCategories" [value]="cat">
+            {{ cat }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Вибрати</mat-label>
+        <select matNativeControl [(ngModel)]="data.selectedEvent" name="Choose" (ngModelChange)="onSelectedEventChanged($event)">
+          <option value="-1" selected>Своя подія</option>
+          <option *ngFor="let event of filteredItems();" [value]="event.id">{{event.title}}</option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Заголовок</mat-label>
+        <input matInput [(ngModel)]="data.title" name="title" required />
+      </mat-form-field>
+
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Опис</mat-label>
+        <input matInput [(ngModel)]="data.description" name="description" />
+      </mat-form-field>
+      
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Початок</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="data.from" name="from" required>
+      </mat-form-field>
+
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Завершення</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="data.to" name="to">
+      </mat-form-field>
+      
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Локація</mat-label>
+        <input matInput [(ngModel)]="data.location" name="location" />
+      </mat-form-field>
+      
+      <mat-form-field class="plan-event-full-width">
+        <mat-label>Відповідальні</mat-label>
+        <input matInput [(ngModel)]="data.responsible" name="responsible" />
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Відмінити</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Зберегти</button>
+</div>

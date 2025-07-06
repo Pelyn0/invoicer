@@ -1,7 +1,7 @@
 <div class="tools">
   <button mat-raised-button (click)="open()">Відкрити збережений</button>
   <button mat-raised-button *ngIf="(authCheck$ | async) == 2" (click)="changeContacts()">Змінити контакти</button>
-  <button mat-raised-button>Додати подію</button>
+  <button mat-raised-button (click)="addEvent()">Додати подію</button>
   <button mat-raised-button (click)="addAction()">Додати нотатки</button>
   <div class="save">
     <mat-form-field class="file-name">

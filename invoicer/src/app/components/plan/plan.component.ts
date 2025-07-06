@@ -24,17 +24,17 @@ export class PlanComponent implements OnInit {
 
     authCheck$: Promise<Rights> = Promise.resolve(Rights.unknown);
 
-    events = [
+    events: PlanEvent[] = [
         {
             title: 'Title 0',
             description: 'This is the description of the event 0',
-            date: new Date('2025-06-05T19:24:00'),
+            from: new Date('2025-06-05T19:24:00'),
             location: "Rest"
         },
         {
             title: 'Title 2',
             description: 'This is the description of the event 2',
-            date: new Date('2025-06-05T19:24:00'),
+            from: new Date('2025-06-05T19:24:00'),
             location: "Rest"
         },
         {
@@ -46,13 +46,13 @@ export class PlanComponent implements OnInit {
         {
             title: 'Title 3',
             description: 'This is the description of the event 3',
-            date: new Date('2025-06-06T19:24:00'),
+            from: new Date('2025-06-06T19:24:00'),
             location: "Home"
         },
         {
             title: 'Title 6',
             description: 'This is the description of the event 4',
-            date: new Date('2025-07-05T19:24:00'),
+            from: new Date('2025-07-05T19:24:00'),
             location: "Home"
         }
     ].sort((a, b) => a.date.getTime() - b.date.getTime());
@@ -120,6 +120,31 @@ export class PlanComponent implements OnInit {
             if(result.action){
                 this.actions.push(result.action);
             }
+        }
+        });
+    }
+    
+    addEvent() {
+        const dialogRef = this.dialog.open(PlanEventDialogComponent, {
+        width: '75vw',
+        enterAnimationDuration: '25ms',
+        exitAnimationDuration: '25ms',
+        data: {
+            title: '',
+            description: '',
+            from: Date.now(),
+            to: Date.now(),
+            selectedCar: '-1',
+            location: '',
+            responsible: '',
+        },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+
+            this.events.push(result);
+            this.events.sort((a, b) => a.from.getTime() - b.from.getTime());
         }
         });
     }

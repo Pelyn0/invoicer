@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { InvoiceItemDialogComponent } from './invoice-item-dialog/invoice-item-dialog.component';
+import { PlanEventDialogComponent } from './plan-event-dialog/plan-event-dialog.component';
 import { InvoiceContactsDialogComponent } from './invoice-contacts-dialog/invoice-contacts-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +26,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     PlanComponent,
     TimelineComponent,
     InvoiceItemDialogComponent,
+    PlanEventDialogComponent,
     InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
     InvoiceActionDialogComponent,
@@ -34,6 +36,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     PlanComponent,
     TimelineComponent,
     InvoiceItemDialogComponent,
+    PlanEventDialogComponent,
     InvoiceContactsDialogComponent,
     SavedInvoicesDialogComponent,
     InvoiceActionDialogComponent,

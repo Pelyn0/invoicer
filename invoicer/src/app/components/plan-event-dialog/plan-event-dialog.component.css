@@ -1,0 +1,12 @@
+.plan-event-form {
+  width: 100%;
+}
+
+.flex-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-event-full-width {
+  width: 100%;
+}
