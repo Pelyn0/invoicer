@@ -42,7 +42,7 @@ export class PlanComponent implements OnInit {
         {
             title: 'Title 1',
             description: 'This is the description of the event 1',
-            date: new Date('2025-06-06T19:24:00'),
+            from: new Date('2025-06-06T19:24:00'),
             location: "Home"
         },
         {
