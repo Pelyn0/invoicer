@@ -538,8 +538,8 @@ export class InvoiceComponent implements OnInit{
         operational
         ? result.push([
           `${i + 1}`,
-          row.title,
-          row.manufacturer,
+          {text: row.title, fontSize: 8},
+          {text: row.manufacturer, fontSize: 8},
           `${row.quantity}`,
           `${row.price}`,
           `${row.price * row.quantity}`,
